@@ -16,12 +16,13 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['Italiano', 'Cinese', 'Giapponese', 'Intenazionale', 'Messicano', 'Indiano','Pizza'];
+        $type_data = config('db.types');
 
-        foreach ($types as $type) {
-            $newType= new Type();
-            $newType->name = $type;
-            $newType->slug = Str::slug($type, '-');
+        foreach ($type_data as $data) {
+            $newType = new Type();
+
+                $newType->name = $data["name"];
+
             $newType->save();
         }
     }
