@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Type;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $types = Type::all();
+        return view('auth.register',compact('types'));
     }
 
     /**
@@ -32,15 +34,25 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'address'=>['required', 'string', 'max:255'],
+            'p_iva'=>['required', 'string', 'max:255'],
+            'types' => ['exists:types,id'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
+            'address' => $request->address,
+            'p_iva' => $request->p_iva,
+            'types' => $request->types,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        if ($request->has('types')) {
+            $user->types()->attach($request->types);
+        }
 
         event(new Registered($user));
 
