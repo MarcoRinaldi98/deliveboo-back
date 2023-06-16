@@ -21,8 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $types = Type::all();
-        return view('auth.register',compact('types'));
+        return view('auth.register');
     }
 
     /**
@@ -34,18 +33,14 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'address'=>['required', 'string', 'max:255'],
-            'p_iva'=>['required', 'string', 'max:255'],
-            'types' => ['exists:types,id'],
+            'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
-            'address' => $request->address,
-            'p_iva' => $request->p_iva,
-            'types' => $request->types,
+            'surname' => $request->surname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
