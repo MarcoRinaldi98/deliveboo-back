@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRestaurantRequest;
+use App\Http\Requests\UpdateRestaurantRequest;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use App\Models\Type;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class RestaurantController extends Controller
 {
@@ -14,7 +21,8 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        //
+        $restaurants = Restaurant::all();
+        return view('admin.restaurants.index', compact('restaurants'));
     }
 
     /**
@@ -24,7 +32,8 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::all();
+        return view('admin.restaurants.create', compact('types'));
     }
 
     /**
@@ -33,9 +42,13 @@ class RestaurantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRestaurantRequest $request)
     {
-        //
+        $form_data = $request->validated();
+        
+        $newRestaurant = Restaurant::create($form_data);
+
+        return redirect()->route('admin.restaurants.show', ['restaurant' => $newRestaurant->id])->with('status', 'Restaurant aggiunto con successo');;
     }
 
     /**
@@ -46,7 +59,7 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        //
+        return view('admin.restaurants.show', compact('restaurant'));
     }
 
     /**
@@ -57,7 +70,8 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        $types = Type::all();
+        return view('admin.restaurants.edit', compact('restaurant','types'));
     }
 
     /**
@@ -67,9 +81,13 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
-        //
+        $form_data = $request->validated();
+        
+        $restaurant->update($form_data);
+
+        return redirect()->route('admin.restaurants.show', ['restaurant' => $restaurant->id])->with('status', 'Restaurant aggiornato con successo');;
     }
 
     /**
@@ -80,6 +98,7 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        //
+        $restaurant->delete();
+        return redirect()->route('admin.restaurants.index', ['restaurant' => $restaurant->id]);
     }
 }
