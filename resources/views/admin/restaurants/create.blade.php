@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="text-center pt-3">Crea una nuova Card</h1>
+    <h1 class="text-center pt-3">Crea nuovo Ristorante</h1>
 
     <div class="py-5 text-center">
         <a href="{{route('admin.restaurants.index')}}" class="btn btn-secondary">Torna alla lista</a>
@@ -24,14 +24,6 @@
             <label for="description" class="form-label">Descrizione (max 1000)(opzionale):</label>
             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
             @error('description')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="image" class="form-label">Seleziona l'immagine da inserire:</label>
-            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
-            @error('image')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
