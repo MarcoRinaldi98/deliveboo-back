@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Auth\TypeController;
+use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\RestaurantController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Restaurants;
+use App\Models\Type;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,13 +29,10 @@ Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->group(function () {
 
-        Route::get('/', [DashboardController::class, 'index'])
-        ->name('dashboard'); 
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); 
+        Route::resource('restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:id']);
+        Route::resource('types', TypeController::class)->parameters(['types' => 'type:id']);
 
-        Route::resource('types', TypeController::class)->parameters([
-            'types' => 'type:slug'
-        ])->only(['index']);
-        
 });
 
 Route::middleware('auth')->group(function () {
