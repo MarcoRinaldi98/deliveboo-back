@@ -10,7 +10,8 @@ return [
             "address" => "633 Randy Rest Apt. 354",
             "image" => "https://picsum.photos/500/300",
             "description" => "La McDonald's Corporation è una catena di ristoranti di fast food statunitense. Fino al 2018 è stata la maggior catena di fast food al mondo per numero di punti vendita, quando è stata superata da Subway.",
-            "type_id" => [2, 8, 12]
+            "type_id" => [2, 8, 12],
+            "user_id" => "1"
         ],
         [
             "id" => 2,
@@ -20,7 +21,8 @@ return [
             "address" => "933 Bernier Valleys",
             "image" => "https://picsum.photos/500/300",
             "description" => "Burger King Corporation è una celebre catena internazionale di ristorazione fast food. È presente con oltre 200 ristoranti in Australia sotto il nome Hungry Jack's.",
-            "type_id" => [2, 8, 12]
+            "type_id" => [2, 8, 12],
+            "user_id" => "2"
         ],
         [
             "id" => 3,
@@ -30,7 +32,8 @@ return [
             "address" => "35946 Mandy Crossing Suite 644",
             "image" => "https://picsum.photos/500/300",
             "description" => "La Kentucky Fried Chicken (pollo fritto del Kentucky), sigla KFC, è una catena statunitense di fast food specializzata nel pollo fritto, preparato secondo una ricetta tenuta segreta sin dalla sua creazione, che in base a quanto dichiarato dalla società è costituita da 11 erbe e spezie.",
-            "type_id" => [2, 8]
+            "type_id" => [2, 8],
+            "user_id" => "3"
         ],
         [
             "id" => 4,
@@ -40,7 +43,8 @@ return [
             "address" => "264 Lynch Estate Apt. 352",
             "image" => "https://picsum.photos/500/300",
             "description" => "Kebhouze è la prima catena di kebab al mondo amata da grandi e piccini! Da Kebhouze è possibile trovare 4 tipi di kebab diversi per tutti i gusti, compreso il kebab vegetale per vegani e vegetariani, così come bowl a base riso o insalata.",
-            "type_id" => [2, 8]
+            "type_id" => [2, 8],
+            "user_id" => "4"
         ],
         [
             "id" => 5,
@@ -50,7 +54,8 @@ return [
             "address" => "7166 Paul Dale Apt. 246",
             "image" => "https://picsum.photos/500/300",
             "description" => "Un mix di riso, pesce crudo e verdure di stagione selezionate con cura da fornitori locali, arricchite da salse uniche preparate con ricette segrete. Personalizza al momento la tua poke tra infinite combinazioni di sapori, o scegli dal menù una delle popolarissime House Bowl!",
-            "type_id" => [7, 10]
+            "type_id" => [7, 10],
+            "user_id" => "5"
         ],
         [
             "id" => 6,
@@ -60,7 +65,8 @@ return [
             "address" => "402 Moen Ville",
             "image" => "https://picsum.photos/500/300",
             "description" => "Personalizza tacos, burrito e bowl scegliendo tra più di 40 mila combinazioni a partire da 6€. Gusta freschissimi piatti Tex Mex pronti in 5 minuti.",
-            "type_id" => [5]
+            "type_id" => [5],
+            "user_id" => "6"
         ]
     ],
     "dishes" => [
