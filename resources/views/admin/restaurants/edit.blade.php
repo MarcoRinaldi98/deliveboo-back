@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="text-center pt-3">Crea un nuovo Project</h1>
+    <h1 class="text-center pt-3">Modifica Ristorante</h1>
 
     <div class="py-5 text-center">
         <a href="{{route('admin.restaurants.index')}}" class="btn btn-secondary">Torna alla lista</a>

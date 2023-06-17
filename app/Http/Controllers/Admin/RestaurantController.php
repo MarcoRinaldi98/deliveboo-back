@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRestaurantRequest;
-use App\Http\Requests\UpdateRestaurantRequest;
+use App\Http\Requests\Restaurant\StoreRestaurantRequest;
+use App\Http\Requests\Restaurant\UpdateRestaurantRequest;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use App\Models\Type;
