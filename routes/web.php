@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\RestaurantController;
+use App\Http\Controllers\Admin\DishController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Restaurants;
 use App\Models\Type;
@@ -32,6 +33,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); 
         Route::resource('restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:id']);
         Route::resource('types', TypeController::class)->parameters(['types' => 'type:id']);
+        Route::resource('dishes', DishController::class)->parameters(['dishes' => 'dish:id']);
 
 });
 

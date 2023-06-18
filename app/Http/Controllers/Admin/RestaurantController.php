@@ -8,6 +8,7 @@ use App\Http\Requests\Restaurant\UpdateRestaurantRequest;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use App\Models\Type;
+use App\Models\Dish;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,7 +22,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::all();;
         return view('admin.restaurants.index', compact('restaurants'));
     }
 
@@ -32,8 +33,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        $types = Type::all();
-        return view('admin.restaurants.create', compact('types'));
+        return view('admin.restaurants.create');
     }
 
     /**
@@ -70,8 +70,7 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        $types = Type::all();
-        return view('admin.restaurants.edit', compact('restaurant','types'));
+        return view('admin.restaurants.edit', compact('restaurant'));
     }
 
     /**
@@ -81,7 +80,7 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
+    public function update(UpdateRestaurantRequest $request)
     {
         $form_data = $request->validated();
         
@@ -96,9 +95,10 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy($id)
     {
+        $restaurant = Restaurant::where('id', $id)->firstOrFail();
         $restaurant->delete();
-        return redirect()->route('admin.restaurants.index', ['restaurant' => $restaurant->id]);
+        return redirect()->route('admin.restaurants.index',$restaurant->id);
     }
 }

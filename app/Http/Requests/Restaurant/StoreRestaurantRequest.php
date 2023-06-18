@@ -5,7 +5,7 @@ namespace App\Http\Requests\Restaurant;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateRestaurantRequest extends FormRequest
+class StoreRestaurantRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,12 @@ class UpdateRestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:150', Rule::unique('restaurants')->ignore($this->restaurant)],
+            'name' => 'required|max:150|unique:restaurants',
             'image' => 'nullable|image|max:1024',
             'description' => 'nullable',
             'address' => 'required',
             'vat' => 'required|min:11',
-            'phone' => 'phone|min:9'
+            'phone' => 'phone|min:9',
         ];
     }
 }

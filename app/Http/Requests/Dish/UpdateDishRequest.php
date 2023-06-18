@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Restaurant;
+namespace App\Http\Requests\Dish;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreRestaurantRequest extends FormRequest
+class UpdateDishRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,14 @@ class StoreRestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:150|unique:restaurants',
+            'name' => ['required', 'max:150', Rule::unique('dishes')->ignore($this->dish)],
+            'restaurant_id' => 'nullable|exists:restaurants,id',
+            'orders' => 'exists:orders,id',
             'image' => 'nullable|image|max:1024',
-            'dscription' => 'nullable',
-            'address' => 'required',
-            'vat' => 'required|min:11',
-            'phone' => 'phone|min:9'
+            'price' => 'required|decimal:2',
+            'description' => 'nullable|max:255',
+            'available' => 'boolean',
+            'phone' => 'phone|min:9',
         ];
     }
 }

@@ -17,6 +17,11 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{route('admin.dishes.index')}}" class="nav-link @if (Route::currentRouteName() == 'admin.dishes.index') active @endif">
+            Dish
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{route('admin.restaurants.create')}}" class="nav-link @if (Route::currentRouteName() == 'admin.restaurants.create') active @endif">
             New Restaurant
           </a>
