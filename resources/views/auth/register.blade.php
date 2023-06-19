@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-4 row">
@@ -110,8 +110,19 @@
                                 @enderror
                             </div>
                         </div>
+                        
+                        <div class="col-md-6">
+                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required autocomplete="image">
 
-                        {{-- <div class="mb-4 row">
+                            @error('image')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                        <div class="mb-4 row">
                             @foreach($types as $type)
                                 <div>
                                     <label for="{{$type->id}}" class="col-md-4 col-form-label text-md-right">{{$type->name}}</label>
@@ -123,7 +134,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div> --}}
+                        </div>
 
                         <div class="mb-4 row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

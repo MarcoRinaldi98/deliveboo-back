@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -54,7 +55,7 @@ class RegisteredUserController extends Controller
             'address'=>['required', 'string', 'max:50'],
             'vat'=>['required', 'unique:restaurants,vat', 'string', 'max:11'],
             'phone'=>['required', 'string', 'max:15'],
-            'image'=>['sometimes','string','image','mimes:jpg,png,jpeg,gif,svg'],
+            'image'=>['sometimes','image','mimes:jpg,png,jpeg,gif,svg'],
             'description'=>['nullable','min:10','max:65000'],
             'types[]'=>['exist:types,id']
         ]);
@@ -64,10 +65,14 @@ class RegisteredUserController extends Controller
             'address'=>$request->input('address'),
             'vat'=>$request->input('vat'),
             'phone'=>$request->input('phone'),
-            'image'=>$request->input('image'),
             'description'=>$request->input('description'),
-            'user_id'=> $UserID
+            'user_id'=> $UserID,
         ]);
+
+        if($request->hasFile('image')){
+            $img_path = Storage::put('cover', $request->image);
+            $restaurant->image = $img_path; 
+        }
 
         if ($request->has('types')) {
             $restaurant->types()->attach($request->types);
