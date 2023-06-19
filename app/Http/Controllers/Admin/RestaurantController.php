@@ -95,10 +95,9 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Restaurant $restaurant)
     {
-        $restaurant = Restaurant::where('id', $id)->firstOrFail();
         $restaurant->delete();
-        return redirect()->route('admin.restaurants.index',$restaurant->id);
+        return redirect()->route('admin.restaurants.index');
     }
 }

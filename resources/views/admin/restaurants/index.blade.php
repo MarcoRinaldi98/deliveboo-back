@@ -19,7 +19,7 @@
               <div class="px-2">
                 <a href="{{route('admin.restaurants.edit', ['restaurant' => $restaurant->id])}}" class="btn btn-info text-white">Modifica</a>
               </div>
-              <form action="{{ route('admin.restaurants.destroy', ['id' => $restaurant->id]) }}" method="POST" onsubmit="return confirm('Vuoi Eliminare?');">
+              <form action="{{ route('admin.restaurants.destroy', ['restaurant' => $restaurant->id]) }}" method="POST" onsubmit="return confirm('Vuoi Eliminare?');">
                 @csrf
                 @method('DELETE')
   
