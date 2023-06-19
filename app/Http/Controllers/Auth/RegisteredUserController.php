@@ -22,7 +22,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $types = Type::all();
+        return view('auth.register', compact('types'));
     }
 
     /**
@@ -53,7 +54,7 @@ class RegisteredUserController extends Controller
             'phone'=>['required', 'string', 'max:15'],
             'image'=>['sometimes','string','image','mimes:jpg,png,jpeg,gif,svg'],
             'description'=>['nullable','min:10','max:65000'],
-            'types'=>['exist:types,id']
+            'types[]'=>['exist:types,id']
         ]);
 
         $restaurant = Restaurant::create([
@@ -62,13 +63,14 @@ class RegisteredUserController extends Controller
             'vat'=>$request->input('vat'),
             'phone'=>$request->input('phone'),
             'image'=>$request->input('image'),
-            'description'=>$request->input('description'),
-            'types'=>$request->inpunt('types'),
+            'description'=>$request->input('description')
         ]);
 
-        $restaurant->save();
-        // associate
+        if ($request->has('types')) {
+            $restaurant->types()->attach($request->types);
+        }
 
+        $restaurant->save();
 
         event(new Registered($user));
 

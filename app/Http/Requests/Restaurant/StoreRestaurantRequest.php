@@ -31,6 +31,7 @@ class StoreRestaurantRequest extends FormRequest
             'address' => 'required',
             'vat' => 'required|min:11',
             'phone' => 'phone|min:9',
+            'types' => 'exists:types,id',
         ];
     }
 }

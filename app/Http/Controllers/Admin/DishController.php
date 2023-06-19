@@ -21,7 +21,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::with(['restaurant', 'orders'])->get();
+        $dishes = Dish::all();
         return view('admin.dishes.index', compact('dishes'));
     }
 
@@ -32,8 +32,6 @@ class DishController extends Controller
      */
     public function create()
     {
-        $restaurants = Restaurant::all();
-        $orders = Order::all();
         return view('admin.dishes.create', compact('restaurants', 'orders'));
 
     }
@@ -55,10 +53,6 @@ class DishController extends Controller
 
         $newDish = Dish::create($validated_data);
 
-        if ($request->has('orders')) {
-            $newDish->orders()->attach($request->orders);
-        }
-
         return redirect()->route('admin.dishes.show', ['restaurant' => $newDish->id])->with('status', 'Dish creato con successo!');
 
     }
@@ -66,10 +60,10 @@ class DishController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Restaurant  $restaurant
+     * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function show(Restaurant $restaurant)
+    public function show(Dish $dish)
     {
         return view('admin.dishes.show', compact('dish'));
     }
@@ -77,24 +71,22 @@ class DishController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Restaurant  $restaurant
+     * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function edit(Restaurant $restaurant)
+    public function edit(Dish $dish)
     {
-        $restaurants = Restaurant::all();
-        $orders = Order::all();
-        return view('admin.dishes.create', compact('restaurants', 'orders'));
+        return view('admin.dishes.create');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Restaurant  $restaurant
+     * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dish $dish)
+    public function update(Request $request)
     {
         $validated_data = $request->validated();
 
@@ -104,10 +96,7 @@ class DishController extends Controller
             return back()->withInput()->withErrors(['id' => 'Impossibile creare il titolo']);
         }
 
-        $dish->orders()->sync($request->orders);
-
         $dish->update($validated_data);
-
 
         return redirect()->route('admin.dishes.show', ['dish' => $dish->id])->with('status', 'dish modificato con successo!');
 
@@ -116,7 +105,7 @@ class DishController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Restaurant  $restaurant
+     * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
     public function destroy(Dish $dish)

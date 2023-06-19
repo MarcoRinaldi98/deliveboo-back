@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Restaurant;
+namespace App\Http\Requests\Type;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateRestaurantRequest extends FormRequest
+class UpdateTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,7 @@ class UpdateRestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:150', Rule::unique('restaurants')->ignore($this->restaurant)],
-            'image' => 'nullable|image|max:1024',
-            'description' => 'nullable',
-            'address' => 'required',
-            'vat' => 'required|min:11',
-            'phone' => 'phone|min:9',
-            'types' => 'exists:types,id',
+            'name' => ['required', 'max:150', Rule::unique('types')->ignore($this->type)],
         ];
     }
 }
