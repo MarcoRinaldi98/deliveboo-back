@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('phone', 15);
             $table->string('image')->nullable();
             $table->text('description', 65000)->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -35,7 +33,7 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('restaurants', function (Blueprint $table){
-            $table->foreignId('user_id')->constrained();
+            Schema::dropIfExists('restaurants');
         });
     }
 };

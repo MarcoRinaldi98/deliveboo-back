@@ -26,7 +26,6 @@ class RestaurantSeeder extends Seeder
                 $newRestaurant->phone = $data["phone"];
                 $newRestaurant->image = $data["image"];
                 $newRestaurant->description = $data["description"];
-                $newRestaurant->user_id = $data["user_id"];
 
             $newRestaurant->save();
         }
