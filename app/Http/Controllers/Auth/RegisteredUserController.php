@@ -61,7 +61,7 @@ class RegisteredUserController extends Controller
             'vat'=>$request->input('vat'),
             'phone'=>$request->input('phone'),
             'image'=>$request->input('image'),
-            'description'=>$request->input('image'),
+            'description'=>$request->input('descrtiption'),
         ]);
 
         $restaurant->save();
