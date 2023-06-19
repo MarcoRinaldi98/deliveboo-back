@@ -12,6 +12,11 @@
             Dish
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{route('admin.dishes.create')}}" class="nav-link @if (Route::currentRouteName() == 'admin.dishes.create') active @endif">
+            New Dishes
+          </a>
+        </li>
       </ul>
     </div>
 </div>
