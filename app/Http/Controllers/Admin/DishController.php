@@ -21,7 +21,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::all();
+        $dishes = Dish::with(['restaurant', 'orders'])->get();
         return view('admin.dishes.index', compact('dishes'));
     }
 
@@ -32,6 +32,9 @@ class DishController extends Controller
      */
     public function create()
     {
+        $restaurants = Restaurant::all();
+        $orders = Order::all();
+        return view('admin.dishes.create', compact('restaurants', 'orders'));
 
     }
 
@@ -43,6 +46,20 @@ class DishController extends Controller
      */
     public function store(StoreDishRequest $request)
     {
+        $validated_data = $request->validated();
+
+        $checkDish = Dish::where('id', $validated_data['id'])->first();
+        if ($checkDish) {
+            return back()->withInput()->withErrors(['id' => 'Cambia il titolo']);
+        }
+
+        $newDish = Post::create($validated_data);
+
+        if ($request->has('orders')) {
+            $newDish->orders()->attach($request->orders);
+        }
+
+        return redirect()->route('admin.dishes.show', ['restaurant' => $newDish->id])->with('status', 'Dish creato con successo!');
 
     }
 
@@ -54,7 +71,7 @@ class DishController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        //
+        return view('admin.dishes.show', compact('dish'));
     }
 
     /**
@@ -65,7 +82,9 @@ class DishController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        $restaurants = Restaurant::all();
+        $orders = Order::all();
+        return view('admin.dishes.create', compact('restaurants', 'orders'));
     }
 
     /**
@@ -77,7 +96,21 @@ class DishController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant)
     {
-        //
+        $validated_data = $request->validated();
+
+        $checkDish = Post::where('id', $validated_data['id'])->where('id', '<>', $dish->id)->first();
+
+        if ($checkDish) {
+            return back()->withInput()->withErrors(['id' => 'Impossibile creare il titolo']);
+        }
+
+        $dish->orders()->sync($request->orders);
+
+        $dish->update($validated_data);
+
+
+        return redirect()->route('admin.dishes.show', ['dish' => $dish->id])->with('status', 'dish modificato con successo!');
+
     }
 
     /**
@@ -88,6 +121,7 @@ class DishController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        //
+        $dish->delete();
+        return redirect()->route('admin.dishes.index');
     }
 }
