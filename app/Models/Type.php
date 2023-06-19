@@ -13,7 +13,7 @@ class Type extends Model
         'name',
     ];
 
-    public function restaurants() {
-        return $this->belongsToMany(Restaurant::class);
+    public function users() {
+        return $this->belongsToMany(User::class);
     }
 }
