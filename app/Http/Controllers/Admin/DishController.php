@@ -53,7 +53,7 @@ class DishController extends Controller
             return back()->withInput()->withErrors(['id' => 'Cambia il titolo']);
         }
 
-        $newDish = Post::create($validated_data);
+        $newDish = Dish::create($validated_data);
 
         if ($request->has('orders')) {
             $newDish->orders()->attach($request->orders);
@@ -94,11 +94,11 @@ class DishController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(Request $request, Dish $dish)
     {
         $validated_data = $request->validated();
 
-        $checkDish = Post::where('id', $validated_data['id'])->where('id', '<>', $dish->id)->first();
+        $checkDish = Dish::where('id', $validated_data['id'])->where('id', '<>', $dish->id)->first();
 
         if ($checkDish) {
             return back()->withInput()->withErrors(['id' => 'Impossibile creare il titolo']);
@@ -119,7 +119,7 @@ class DishController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy(Dish $dish)
     {
         $dish->delete();
         return redirect()->route('admin.dishes.index');

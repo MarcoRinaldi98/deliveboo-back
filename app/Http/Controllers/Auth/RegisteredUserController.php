@@ -49,10 +49,11 @@ class RegisteredUserController extends Controller
         $request->validate([
             'restaurant_name'=>['required', 'string', 'max:50'],
             'address'=>['required', 'string', 'max:50'],
-            'vat'=>['required', 'unique', 'string', 'max:11'],
+            'vat'=>['required', 'unique:restaurants,vat', 'string', 'max:11'],
             'phone'=>['required', 'string', 'max:15'],
             'image'=>['sometimes','string','image','mimes:jpg,png,jpeg,gif,svg'],
             'description'=>['nullable','min:10','max:65000'],
+            'types'=>['exist:types,id']
         ]);
 
         $restaurant = Restaurant::create([
@@ -61,15 +62,13 @@ class RegisteredUserController extends Controller
             'vat'=>$request->input('vat'),
             'phone'=>$request->input('phone'),
             'image'=>$request->input('image'),
-            'description'=>$request->input('descrtiption'),
+            'description'=>$request->input('description'),
+            'types'=>$request->inpunt('types'),
         ]);
 
         $restaurant->save();
         // associate
 
-        if ($request->has('types')) {
-            $user->types()->attach($request->types);
-        }
 
         event(new Registered($user));
 

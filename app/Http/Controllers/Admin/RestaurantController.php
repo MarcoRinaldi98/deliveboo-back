@@ -22,8 +22,9 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();;
-        return view('admin.restaurants.index', compact('restaurants'));
+        $types = Type::all();
+        $restaurants = Restaurant::all();
+        return view('admin.restaurants.index', compact('restaurants', 'types'));
     }
 
     /**
@@ -33,7 +34,8 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('admin.restaurants.create');
+        $types = Type::all();
+        return view('admin.restaurants.create', compact('types'));
     }
 
     /**
@@ -48,6 +50,9 @@ class RestaurantController extends Controller
         
         $newRestaurant = Restaurant::create($form_data);
 
+        if ($request->has('types')) {
+            $newRestaurant->types()->attach($request->types);
+        }
         return redirect()->route('admin.restaurants.show', ['restaurant' => $newRestaurant->id])->with('status', 'Restaurant aggiunto con successo');;
     }
 
@@ -70,7 +75,8 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('admin.restaurants.edit', compact('restaurant'));
+        $types = Type::all();
+        return view('admin.restaurants.edit', compact('restaurant','types'));
     }
 
     /**
@@ -80,10 +86,10 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRestaurantRequest $request)
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
         $form_data = $request->validated();
-        
+        $restaurant->types()->sync($request->types);
         $restaurant->update($form_data);
 
         return redirect()->route('admin.restaurants.show', ['restaurant' => $restaurant->id])->with('status', 'Restaurant aggiornato con successo');;
