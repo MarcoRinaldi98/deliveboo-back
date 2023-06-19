@@ -111,7 +111,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-4 row">
+                        {{-- <div class="mb-4 row">
                             @foreach($types as $type)
                                 <div>
                                     <label for="{{$type->id}}" class="col-md-4 col-form-label text-md-right">{{$type->name}}</label>
@@ -123,7 +123,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         <div class="mb-4 row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

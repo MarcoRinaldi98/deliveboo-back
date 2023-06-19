@@ -46,6 +46,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $UserID = $user->id;
+
         $request->validate([
             'restaurant_name'=>['required', 'string', 'max:50'],
             'address'=>['required', 'string', 'max:50'],
@@ -53,7 +55,7 @@ class RegisteredUserController extends Controller
             'phone'=>['required', 'string', 'max:15'],
             'image'=>['sometimes','string','image','mimes:jpg,png,jpeg,gif,svg'],
             'description'=>['nullable','min:10','max:65000'],
-            'types'=>['exist:types,id']
+            'types'=>['exist:types,id'],
         ]);
 
         $restaurant = Restaurant::create([
@@ -63,7 +65,8 @@ class RegisteredUserController extends Controller
             'phone'=>$request->input('phone'),
             'image'=>$request->input('image'),
             'description'=>$request->input('description'),
-            'types'=>$request->inpunt('types'),
+            'types'=>$request->input('types'),
+            'user_id'=> $UserID
         ]);
 
         $restaurant->save();
