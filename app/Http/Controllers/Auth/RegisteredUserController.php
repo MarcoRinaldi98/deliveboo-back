@@ -54,7 +54,7 @@ class RegisteredUserController extends Controller
             'restaurant_name'=>['required', 'string', 'max:50'],
             'address'=>['required', 'string', 'max:50'],
             'vat'=>['required', 'unique:restaurants,vat', 'string', 'numeric', 'min:11','max:11'],
-            'phone'=>['required', 'string', 'max:15'],
+            'phone'=>['required', 'string', 'min:10','max:15'],
             'image'=>['nullable','image','mimes:jpg,png,jpeg,gif,svg'],
             'description'=>['nullable','min:10','max:65000'],
             'types[]'=>['exist:types,id']

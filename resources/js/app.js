@@ -3,10 +3,10 @@ import '~resources/scss/app.scss';
 import * as bootstrap from 'bootstrap';
 import.meta.glob([
     '../img/**'
-])
+]);
 
 
-function validaForm(form) {
+function validateForm(form) {
     // Effettua la validazione dei campi del modulo
     var name = form.name.value;
     var surname = form.surname.value;
@@ -48,13 +48,18 @@ function validaForm(form) {
         alert("Il campo non può contenere meno di 11 caratteri.");
         return false;
     }
+    
+    if (phone.length < 10) {
+        alert("Il campo non può contenere meno di 10 caratteri.");
+        return false;
+    }
 
     if (phone.length > 15) {
         alert("Il campo non può contenere più di 15 caratteri.");
         return false;
     }
 
-    if (restaurant_name.length > 50||address.length > 50||) {
+    if (restaurant_name.length > 50||address.length > 50) {
         return "Il campo deve contenere al massimo 50 caratteri.";
     }
 
@@ -85,6 +90,10 @@ function validaForm(form) {
     var fileExtension = image.name.split(".").pop().toLowerCase();
     if (!allowedExtensions.includes(fileExtension)) {
         return "Il campo immagine deve essere un file con estensione jpg, jpeg, png, gif o svg.";
+    }
+
+    if (isNaN(types) || types < 1 || types > 12) {
+        return "Uno o più tipi selezionati non sono validi.";
     }
     
     // Verifica se il campo "confirmPassword" è obbligatorio
