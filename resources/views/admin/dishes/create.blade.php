@@ -2,42 +2,69 @@
 
 @section('content')
 
-    <form method="POST" action="{{ route('admin.dishes.store') }}" enctype="multipart/form-data">
+<form action="{{ route('admin.dishes.store') }}" method="POST">
+    @csrf
+ 
+    <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
+    
+    <div class="mb-3">
+        <label for="name" class="form-label">Titolo</label>
+        <input type="text" class="form-control @error('name') is-invalid @enderror " id="name" name="name" value="{{old('name')}}">
+        @error('name')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Prezzo</label>
+        <input type="text" class="form-control @error('price') is-invalid @enderror " id="price" name="price" value="{{old('price')}}">
+        @error('price')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+        @enderror
+    </div>
 
-        @csrf
-
-        <div class="mb-3">
-            <label for="name" class="form-label">Titolo</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror " id="name" name="name" value="{{old('name')}}">
-            @error('name')
-                <div class="invalid-feedback">
-                    {{$message}}
-                </div>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="description" class="form-label">Testo dell'articolo</label>
+    <div class="mb-3">
+            <label for="description" class="form-label">Descrizione</label>
             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{old('description')}}</textarea>
             @error('description')
                 <div class="invalid-feedback">
                     {{$message}}
                 </div>
             @enderror
-        </div>
+    </div>
 
-        <div class="mb-3">
-            <label for="price" class="form-label">Prezzo</label>
-            <input type="text" class="form-control @error('price') is-invalid @enderror " id="price" name="price" value="{{old('price')}}">
-            @error('price')
-                <div class="invalid-feedback">
-                    {{$message}}
-                </div>
-            @enderror
-        </div>
+    <div class="mb-3">
+        <label for="available" class="form-label">Disponibile</label>
+        <select class="form-select @error('available') is-invalid @enderror" name="available" id="available">
+            <option @selected(old('available')== 0) value="0">No</option>
+            <option @selected(old('available')== 1) value="1">Si</option>
+        </select>
+        @error('available')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+        @enderror
+    </div>
 
-        <button type="submit" class="btn btn-primary">Salva</button>
+    <div class="mb-3">
 
-    </form>
+        <label for="image" class="form-label">Seleziona immagine di copertina</label>
+
+        <input type="file" class="form-control @error('image') is-invalid @enderror " id="image" name="image">
+        @error('image')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+        @enderror
+    </div>
+
+
+    <!-- Altri campi per il nome del piatto, la descrizione, il prezzo, ecc. -->
+
+    <button type="submit" class="btn btn-primary">Aggiungi Piatto</button>
+</form>
 
 @endsection

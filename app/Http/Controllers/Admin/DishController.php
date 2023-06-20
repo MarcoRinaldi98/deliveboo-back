@@ -30,9 +30,9 @@ class DishController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Restaurant $restaurant)
     {
-        return view('admin.dishes.create');
+        return view('admin.dishes.create', ['restaurant' => $restaurant], compact('restaurant'));
 
     }
 
@@ -42,19 +42,21 @@ class DishController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDishRequest $request)
+    public function store(Request $request, Restaurant $restaurant)
     {
-        $validated_data = $request->validated();
+        $data = $request->validate([
+            'name'=>'required',
+            'description',
+            'price',
+            'image',
+            'available',
+            'restaurant_id' => 'nullable|exists:restaurants,id',
+        ]);
+    
+        $dish = Dish::create($data);
 
-        $checkDish = Dish::where('id', $validated_data['id'])->first();
-        if ($checkDish) {
-            return back()->withInput()->withErrors(['id' => 'Cambia il titolo']);
-        }
-
-        $newDish = Dish::create($validated_data);
-
-        return redirect()->route('admin.dishes.show', ['restaurant' => $newDish->id])->with('status', 'Dish creato con successo!');
-
+    
+        return redirect()->route('admin.dishes.index',['dish' => $dish->id], compact('restaurant'))->with('success', 'Piatto aggiunto correttamente.');
     }
 
     /**
@@ -74,9 +76,9 @@ class DishController extends Controller
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dish $dish)
+    public function edit(Dish $dish, Restaurant $restaurant)
     {
-        return view('admin.dishes.create');
+        return view('admin.dishes.edit', compact('restaurant'));
     }
 
     /**
@@ -88,17 +90,7 @@ class DishController extends Controller
      */
     public function update(Request $request)
     {
-        $validated_data = $request->validated();
-
-        $checkDish = Dish::where('id', $validated_data['id'])->where('id', '<>', $dish->id)->first();
-
-        if ($checkDish) {
-            return back()->withInput()->withErrors(['id' => 'Impossibile creare il titolo']);
-        }
-
-        $dish->update($validated_data);
-
-        return redirect()->route('admin.dishes.show', ['dish' => $dish->id])->with('status', 'dish modificato con successo!');
+       
 
     }
 
@@ -110,7 +102,6 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
-        $dish->delete();
-        return redirect()->route('admin.dishes.index');
+        
     }
 }

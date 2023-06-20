@@ -34,6 +34,8 @@ Route::middleware(['auth', 'verified'])
         Route::resource('restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:id']);
         Route::resource('types', TypeController::class)->parameters(['types' => 'type:id']);
         Route::resource('dishes', DishController::class)->parameters(['dishes' => 'dish:id']);
+        Route::get('restaurants/{restaurant}/dishes/create', [DishController::class, 'create'])->name('admin.dishes.create');
+        Route::post('restaurants/{restaurant}/dishes', [DishController::class ,'store'])->name('admin.dishes.store');
 
 });
 
