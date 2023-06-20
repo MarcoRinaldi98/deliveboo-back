@@ -3,7 +3,7 @@
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
           <a href="{{route('admin.dashboard')}}" class="nav-link {{Route::currentRouteName() == 'admin.dashboard'?'active':''}}">
-            Dashboard
+            Restaurant
           </a>
         </li>
         </li>
