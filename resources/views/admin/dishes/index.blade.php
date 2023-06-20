@@ -5,13 +5,19 @@
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col">Nome</th>
       </tr>
     </thead>
     <tbody>
+      
         @foreach ($dishes as $dish)
+    
+          @if ($dish->restaurant_id == auth()->user()->id)
+
           <tr>
             <td>{{ $dish->id }}</td>
             <td>{{ $dish->name }}</td>
+            <td>{{ $dish->restaurant_id }}</td>
             <td class="d-flex">
               <div>
                 <a class="btn btn-primary" href="{{route('admin.dishes.show', $dish->id)}}">VEDI</a>
@@ -27,8 +33,11 @@
               </form>
   
             </td>
-
+  
           </tr>
+
+          @endif
+
         @endforeach
     </tbody>
   </table>

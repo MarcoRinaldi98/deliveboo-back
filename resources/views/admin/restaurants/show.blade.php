@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 @foreach ($restaurants as $restaurant)
     @auth
         @if ($restaurant->user_id == auth()->user()->id)
@@ -24,6 +23,4 @@
     @endauth
 @endforeach
 
-
-    
 @endsection

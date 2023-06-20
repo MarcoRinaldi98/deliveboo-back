@@ -2,11 +2,18 @@
 
 @section('content')
 
-<form action="{{ route('admin.dishes.store') }}" method="POST">
+<form action="{{ route('admin.dishes.store')}}" method="POST">
     @csrf
- 
-    <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
+
+    <input type="hidden" name="restaurant_id" 
     
+    @foreach ($restaurants as $restaurant)
+        @if ($restaurant->user_id == auth()->user()->id)
+            value="{{ $restaurant->id }}"
+        @endif
+    @endforeach
+
+    >    
     <div class="mb-3">
         <label for="name" class="form-label">Titolo</label>
         <input type="text" class="form-control @error('name') is-invalid @enderror " id="name" name="name" value="{{old('name')}}">
@@ -60,9 +67,6 @@
             </div>
         @enderror
     </div>
-
-
-    <!-- Altri campi per il nome del piatto, la descrizione, il prezzo, ecc. -->
 
     <button type="submit" class="btn btn-primary">Aggiungi Piatto</button>
 </form>

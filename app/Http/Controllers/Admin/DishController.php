@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dish;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -21,8 +22,9 @@ class DishController extends Controller
      */
     public function index()
     {
+        $restaurants = Restaurant::all();
         $dishes = Dish::all();
-        return view('admin.dishes.index', compact('dishes'));
+        return view('admin.dishes.index', compact('dishes', 'restaurants'));
     }
 
     /**
@@ -30,10 +32,10 @@ class DishController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Restaurant $restaurant)
+    public function create(Dish $dish)
     {
-        return view('admin.dishes.create', ['restaurant' => $restaurant], compact('restaurant'));
-
+        $restaurants = Restaurant::all();
+        return view('admin.dishes.create', compact('restaurants'));
     }
 
     /**
@@ -44,19 +46,19 @@ class DishController extends Controller
      */
     public function store(Request $request, Restaurant $restaurant)
     {
+       
         $data = $request->validate([
-            'name'=>'required',
-            'description',
-            'price',
-            'image',
-            'available',
-            'restaurant_id' => 'nullable|exists:restaurants,id',
+            'name'=>'nullable',
+            'description'=>'nullable',
+            'price'=>'nullable',
+            'image'=>'nullable',
+            'available'=>'nullable',
+            'restaurant_id' => 'exists:restaurants,id',
         ]);
     
         $dish = Dish::create($data);
-
     
-        return redirect()->route('admin.dishes.index',['dish' => $dish->id], compact('restaurant'))->with('success', 'Piatto aggiunto correttamente.');
+        return redirect()->route('admin.dishes.index', compact('restaurant'))->with('success', 'Piatto aggiunto correttamente.');
     }
 
     /**
@@ -77,9 +79,9 @@ class DishController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Dish $dish, Restaurant $restaurant)
-    {
-        return view('admin.dishes.edit', compact('restaurant'));
-    }
+{
+    return view('admin.dishes.edit', compact('dish', 'restaurant'));
+}
 
     /**
      * Update the specified resource in storage.
