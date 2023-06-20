@@ -32,7 +32,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('admin.dishes.create', compact('restaurants', 'orders'));
+        return view('admin.dishes.create');
 
     }
 

@@ -22,8 +22,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
-        return view('admin.restaurants.index', compact('restaurants', 'types'));
+        
     }
 
     /**
@@ -33,7 +32,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('admin.restaurants.create');
+
     }
 
     /**
@@ -59,7 +58,9 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('admin.restaurants.show', compact('restaurant'));
+
+        $restaurants = Restaurant::all();
+        return view('admin.restaurants.show', compact('restaurants'));
     }
 
     /**
