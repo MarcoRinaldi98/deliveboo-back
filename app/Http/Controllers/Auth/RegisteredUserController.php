@@ -35,8 +35,8 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'alpha'],
+            'surname' => ['required', 'string', 'max:255', 'alpha'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -53,9 +53,9 @@ class RegisteredUserController extends Controller
         $request->validate([
             'restaurant_name'=>['required', 'string', 'max:50'],
             'address'=>['required', 'string', 'max:50'],
-            'vat'=>['required', 'unique:restaurants,vat', 'string', 'max:11'],
+            'vat'=>['required', 'unique:restaurants,vat', 'string', 'numeric', 'max:11'],
             'phone'=>['required', 'string', 'max:15'],
-            'image'=>['sometimes','image','mimes:jpg,png,jpeg,gif,svg'],
+            'image'=>['nullable','image','mimes:jpg,png,jpeg,gif,svg'],
             'description'=>['nullable','min:10','max:65000'],
             'types[]'=>['exist:types,id']
         ]);
@@ -78,6 +78,9 @@ class RegisteredUserController extends Controller
             $restaurant->types()->attach($request->types);
         }
 
+
+
+
         $restaurant->save();
 
         event(new Registered($user));
@@ -85,5 +88,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+
+
     }
 }
