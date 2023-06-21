@@ -55,6 +55,11 @@ class DishController extends Controller
             'available'=>'nullable',
             'restaurant_id' => 'exists:restaurants,id',
         ]);
+
+        if ($request->hasFile('image')) {
+            $path = Storage::put('cover', $request->image);
+            $data['image'] = $path;
+        }
     
         $dish = Dish::create($data);
     
@@ -69,7 +74,8 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        return view('admin.dishes.show', compact('dish'));
+        $dishes = Dish::all();
+        return view('admin.dishes.show', compact('dishes'));
     }
 
     /**
@@ -79,21 +85,43 @@ class DishController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Dish $dish, Restaurant $restaurant)
-{
-    return view('admin.dishes.edit', compact('dish', 'restaurant'));
-}
+    {
+        $restaurants = Restaurant::all();
+        return view('admin.dishes.edit', compact('dish', 'restaurants'));
+    }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Dish  $dish
+     * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Dish $dish, Restaurant $restaurant)
     {
-       
+        $data = $request->validate([
+            'name' => 'nullable',
+            'description' => 'nullable',
+            'price' => 'nullable',
+            'image' => 'nullable',
+            'available' => 'nullable',
+        ]);
 
+        if ($request->hasFile('image')) {
+
+            if ($dish->image) {
+                Storage::delete($dish->image);
+            }
+
+            $path = Storage::put('cover', $request->image);
+            $data['image'] = $path;
+
+        }
+
+        $dish->update($data);
+
+        return redirect()->route('admin.dishes.index', compact('restaurant', 'dish'))->with('success', 'Piatto Aggiornato correttamente.');
     }
 
     /**
@@ -104,6 +132,25 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
-        
+        if ($dish->image) {
+            Storage::delete($dish->image);
+        }
+
+        $dish->delete();
+        return redirect()->route('admin.dishes.index');
+    }
+
+    public function deleteImage($id) {
+
+        $dish = Dish::where('id', $id)->firstOrFail();
+
+        if ($dish->image) {
+            Storage::delete($dish->image);
+            $dish->image = null;
+            $dish->save();
+        }
+
+        return redirect()->route('admin.dishes.edit', $dish->id);
+
     }
 }

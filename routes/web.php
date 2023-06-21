@@ -36,7 +36,9 @@ Route::middleware(['auth', 'verified'])
         Route::resource('dishes', DishController::class)->parameters(['dishes' => 'dish:id']);
         Route::get('restaurants/{restaurant}/dishes/create', [DishController::class, 'create'])->name('admin.dishes.create');
         Route::post('restaurants/{restaurant}/dishes', [DishController::class ,'store'])->name('admin.dishes.store');
-
+        Route::get('/dishes/{dish}/edit/{restaurant}', [DishController::class, 'edit'])->name('admin.dishes.edit');
+        Route::put('/dishes/{dish}/{restaurant}', [DishController::class, 'update'])->name('admin.dishes.update');
+        Route::delete('posts/{id}/deleteImage', [DishController::class, 'deleteImage'])->name('dishes.deleteImage');
 });
 
 Route::middleware('auth')->group(function () {

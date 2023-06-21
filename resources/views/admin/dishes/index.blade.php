@@ -6,6 +6,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nome</th>
+        <th scope="col">Azioni</th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +18,6 @@
           <tr>
             <td>{{ $dish->id }}</td>
             <td>{{ $dish->name }}</td>
-            <td>{{ $dish->restaurant_id }}</td>
             <td class="d-flex">
               <div>
                 <a class="btn btn-primary" href="{{route('admin.dishes.show', $dish->id)}}">VEDI</a>
