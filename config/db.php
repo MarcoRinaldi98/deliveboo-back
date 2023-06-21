@@ -228,5 +228,130 @@ return [
             "id" => 12,
             "name" => 'Panini'
         ]
+        ],
+    'user'=>[
+        [
+            'id' => 1,
+            'name'=>'Marco',
+            'surname'=>'Rinaldi',
+            'email'=>'marcorinaldi@test.com',
+            'password'=>'testtest'
+        ],
+        [
+            'id' => 2,
+            'name'=>'Francesco',
+            'surname'=>'Rocco',
+            'email'=>'francescorocco@test.com',
+            'password'=>'testtest'
+        ],
+        [
+            'id' => 3,
+            'name'=>'Michele',
+            'surname'=>'Santoro',
+            'email'=>'michelesantoro@test.com',
+            'password'=>'testtest'
+        ],
+        [
+            'id' => 4,
+            'name'=>'Stefano',
+            'surname'=>'Alesci',
+            'email'=>'stefanoalesci@test.com',
+            'password'=>'testtest'
+        ],
+        [
+            'id' => 5,
+            'name'=>'Carmine',
+            'surname'=>'Faella',
+            'email'=>'carminefaella@test.com',
+            'password'=>'testtest'
+        ],
+        [
+            'id' => 6,
+            'name'=>'Mario',
+            'surname'=>'Rossi',
+            'email'=>'mariorossi@test.com',
+            'password'=>'testtest'
+        ]
+        ],
+    'orders'=>[
+        [
+            'id'=>'1',
+            'guest_name'=>'Carmine',
+            'guest_surname'=>'Faella',
+            'guest_email'=>'carminefaella@test.it',
+            'guest_address'=>'test address',
+            'guest_phone'=>'0123456789',
+            'amount'=>'100',
+            'status'=>'1',
+            'date'=>'2023-06-21',
+            "dish_id" => [1,2],
+            'restaurant_id'=>'1'
+        ],
+        [
+            'id'=>'2',
+            'guest_name'=>'Francesco',
+            'guest_surname'=>'Rosso',
+            'guest_email'=>'francescorocco@test.it',
+            'guest_address'=>'test address',
+            'guest_phone'=>'0123456789',
+            'amount'=>'50',
+            'status'=>'0',
+            'date'=>'2023-06-21',
+            "dish_id" => [3,4],
+            'restaurant_id'=>'2'
+        ],
+        [
+            'id'=>'3',
+            'guest_name'=>'Stefano',
+            'guest_surname'=>'Alesci',
+            'guest_email'=>'stefanoalesci@test.it',
+            'guest_address'=>'test address',
+            'guest_phone'=>'0123456789',
+            'amount'=>'60',
+            'status'=>'1',
+            'date'=>'2023-06-21',
+            "dish_id" => [5,6],
+            'restaurant_id'=>'3'
+        ],
+        [
+            'id'=>'4',
+            'guest_name'=>'Marco',
+            'guest_surname'=>'Rinaldi',
+            'guest_email'=>'marcorinaldi@test.it',
+            'guest_address'=>'test address',
+            'guest_phone'=>'0123456789',
+            'amount'=>'40',
+            'status'=>'1',
+            'date'=>'2023-06-21',
+            "dish_id" => [7,8],
+            'restaurant_id'=>'4'
+        ],
+        [
+            'id'=>'5',
+            'guest_name'=>'Michele',
+            'guest_surname'=>'Santoro',
+            'guest_email'=>'michelesantoro@test.it',
+            'guest_address'=>'test address',
+            'guest_phone'=>'0123456789',
+            'amount'=>'200',
+            'status'=>'1',
+            'date'=>'2023-06-21',
+            "dish_id" => [9,10],
+            'restaurant_id'=>'5'
+        ],
+        [
+            'id'=>'6',
+            'guest_name'=>'Marco',
+            'guest_surname'=>'Rossi',
+            'guest_email'=>'marcorossi@test.it',
+            'guest_address'=>'test address',
+            'guest_phone'=>'0123456789',
+            'amount'=>'20',
+            'status'=>'0',
+            'date'=>'2023-06-21',
+            "dish_id" => [11,12],
+            'restaurant_id'=>'6'
+        ]
+        
     ]
 ];

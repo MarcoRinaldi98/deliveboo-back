@@ -16,6 +16,7 @@ class RestaurantSeeder extends Seeder
     public function run()
     {
         $restaurant_data = config('db.restaurants');
+        $users_id = [1,2,3,4,5,6];
 
         foreach ($restaurant_data as $data) {
             $newRestaurant = new Restaurant();
@@ -26,6 +27,9 @@ class RestaurantSeeder extends Seeder
                 $newRestaurant->phone = $data["phone"];
                 $newRestaurant->image = $data["image"];
                 $newRestaurant->description = $data["description"];
+                foreach($users_id as $user_id){
+                    $newRestaurant->user_id = $data["user_id"];
+                };
 
             $newRestaurant->save();
         }
