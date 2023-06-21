@@ -26,7 +26,7 @@ class UpdateRestaurantRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:150', Rule::unique('restaurants')->ignore($this->restaurant)],
-            'image' => 'required|image|max:1024',
+            'image' => 'nullable|image|max:1024',
             'description' => 'required',
             'address' => 'required',
             'vat' => 'required|min:11',

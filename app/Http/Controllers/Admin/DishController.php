@@ -63,7 +63,7 @@ class DishController extends Controller
     
         $dish = Dish::create($data);
     
-        return redirect()->route('admin.dishes.index', compact('restaurant'))->with('success', 'Piatto aggiunto correttamente.');
+        return redirect()->route('admin.dishes.index', compact('restaurant'))->with('status', 'Piatto aggiunto correttamente.');
     }
 
     /**
@@ -74,8 +74,7 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        $dishes = Dish::all();
-        return view('admin.dishes.show', compact('dishes'));
+        return view('admin.dishes.show', compact('dish'));
     }
 
     /**
@@ -121,7 +120,7 @@ class DishController extends Controller
 
         $dish->update($data);
 
-        return redirect()->route('admin.dishes.index', compact('restaurant', 'dish'))->with('success', 'Piatto Aggiornato correttamente.');
+        return redirect()->route('admin.dishes.index', compact('restaurant', 'dish'))->with('status', 'Piatto Aggiornato correttamente.');
     }
 
     /**

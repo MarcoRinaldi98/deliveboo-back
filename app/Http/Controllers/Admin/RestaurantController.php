@@ -130,7 +130,7 @@ class RestaurantController extends Controller
             $restaurant->save();
         }
 
-        return redirect()->route('admin.restaurants.edit', $restaurant->id);
+        return redirect()->route('admin.admin.restaurants.edit', $restaurant->id);
 
     }
 }
