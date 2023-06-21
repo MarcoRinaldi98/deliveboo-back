@@ -9,7 +9,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" onsubmit="return validaForm(this)">
+                    <form id="register" method="POST" action="{{ route('register') }}" enctype="multipart/form-data" onsubmit="return validateForm(this)">
                         @csrf
 
                         <div class="mb-4 row">
@@ -126,8 +126,8 @@
                         <div class="mb-4 row">
                             @foreach($types as $type)
                                 <div>
-                                    <label for="{{$type->id}}" class="col-md-4 col-form-label text-md-right">{{$type->name}}</label>
-                                    <input id="{{$type->id}}" @if (in_array($type->id , old('types', []))) checked @endif  class="@error('types') is-invalid @enderror" type="checkbox" name="types[]" value="{{$type->id}}">
+                                    <label for="types-{{$type->id}}" class="col-md-4 col-form-label text-md-right">{{$type->name}}</label>
+                                    <input id="types-{{$type->id}}" @if (in_array($type->id , old('types', []))) checked @endif  class="@error('types') is-invalid @enderror" type="checkbox" name="types[]" value="{{$type->id}}">
                                 </div>
                             @endforeach
                             @error('types')
