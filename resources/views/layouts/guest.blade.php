@@ -17,6 +17,7 @@
     <body class="font-sans text-gray-900 antialiased">
 
         @include('partials.error')
+        @include('partials.messages')
         @include('partials.header')
         @yield('content')
 

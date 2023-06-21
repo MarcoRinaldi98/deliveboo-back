@@ -45,6 +45,12 @@ class RestaurantController extends Controller
     public function store(StoreRestaurantRequest $request)
     {
         $form_data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $path = Storage::put('cover', $request->image);
+            $data['image'] = $path;
+        }
+    
         
         $newRestaurant = Restaurant::create($form_data);
 
@@ -59,7 +65,6 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-
         $restaurants = Restaurant::all();
         return view('admin.restaurants.show', compact('restaurants'));
     }
@@ -85,10 +90,18 @@ class RestaurantController extends Controller
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
         $form_data = $request->validated();
-        
+
+        if ($request->hasFile('image')) {
+            if ($restaurant->image) {
+                Storage::delete($restaurant->image);
+            }
+            $path = Storage::put('cover', $request->file('image'));
+            $form_data['image'] = $path;
+        }
+
         $restaurant->update($form_data);
 
-        return redirect()->route('admin.restaurants.show', ['restaurant' => $restaurant->id])->with('status', 'Restaurant aggiornato con successo');;
+        return redirect()->route('admin.restaurants.show', ['restaurant' => $restaurant->id])->with('status', 'Restaurant aggiornato con successo');
     }
 
     /**
@@ -99,7 +112,25 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
+        if ($restaurant->image) {
+            Storage::delete($restaurant->image);
+        }
+
         $restaurant->delete();
         return redirect()->route('admin.restaurants.index');
+    }
+
+    public function deleteImage($id) {
+
+        $restaurant = Restaurant::where('id', $id)->firstOrFail();
+
+        if ($restaurant->image) {
+            Storage::delete($restaurant->image);
+            $restaurant->image = null;
+            $restaurant->save();
+        }
+
+        return redirect()->route('admin.restaurants.edit', $restaurant->id);
+
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\RestaurantController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\DishController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Restaurants;
@@ -39,6 +40,12 @@ Route::middleware(['auth', 'verified'])
         Route::get('/dishes/{dish}/edit/{restaurant}', [DishController::class, 'edit'])->name('admin.dishes.edit');
         Route::put('/dishes/{dish}/{restaurant}', [DishController::class, 'update'])->name('admin.dishes.update');
         Route::delete('posts/{id}/deleteImage', [DishController::class, 'deleteImage'])->name('dishes.deleteImage');
+        Route::delete('restaurants/{id}/deleteImage', [RestaurantController::class, 'deleteImage'])->name('restaurants.deleteImage');
+        Route::get('restaurants/{restaurant}/edit', [RestaurantController::class, 'edit'])->name('admin.restaurants.edit');
+        Route::put('restaurants/{restaurant}', [RestaurantController::class, 'update'])->name('admin.restaurants.update');
+        Route::get('restaurants/{restaurant}/edit', [RestaurantController::class, 'edit'])->name('admin.restaurants.edit');
+        Route::resource('orders', OrderController::class)->parameters(['orders' => 'order:id']);
+
 });
 
 Route::middleware('auth')->group(function () {

@@ -78,9 +78,6 @@ class RegisteredUserController extends Controller
             $restaurant->types()->attach($request->types);
         }
 
-
-
-
         $restaurant->save();
 
         event(new Registered($user));

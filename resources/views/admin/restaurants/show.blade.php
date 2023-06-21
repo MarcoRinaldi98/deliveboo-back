@@ -16,6 +16,9 @@
                         <p class="card-text">{{ $restaurant->vat }}</p>
                         <p class="card-text">{{ $restaurant->phone }}</p>
                         <p class="card-text">{{ $restaurant->description }}</p>
+                        <div class="px-2">
+                            <a href="{{route('admin.admin.restaurants.edit', ['restaurant' => $restaurant->id])}}" class="btn btn-info text-white">Modifica</a>
+                        </div>
                     </div>
                 </div>
             </div>

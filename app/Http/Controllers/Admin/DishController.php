@@ -48,11 +48,11 @@ class DishController extends Controller
     {
        
         $data = $request->validate([
-            'name'=>'nullable',
-            'description'=>'nullable',
-            'price'=>'nullable',
-            'image'=>'nullable',
-            'available'=>'nullable',
+            'name'=>'required|string|max:150',
+            'description'=>'required|text:max:255',
+            'price'=>'required|',
+            'image'=>'image|mimes:jpg,png,jpeg,gif,svg',
+            'available'=>'required',
             'restaurant_id' => 'exists:restaurants,id',
         ]);
 
