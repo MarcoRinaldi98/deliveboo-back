@@ -17,7 +17,15 @@ class DishController extends Controller
             'success' => true,
             'response' => $dishes,
         ]);
+    }
 
+    public function SingleDishShow($id)
+    {
+        $dish = Dish::where('id', $id)->get();
 
+        return response()->json([
+            'success' => true,
+            'results' => $dish
+        ]);
     }
 }
