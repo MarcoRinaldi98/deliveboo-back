@@ -50,7 +50,7 @@ class DishController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:150',
             'description' => 'required|max:255',
-            'price' => 'required',
+            'price' => 'required|decimal:2',
             'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048|image', 
             'available' => 'required',
             'restaurant_id' => 'exists:restaurants,id',
@@ -102,7 +102,7 @@ class DishController extends Controller
         $data = $request->validate([
             'name'=>'required|string|max:150',
             'description'=>'required|max:255',
-            'price'=>'required|',
+            'price'=>'required|decimal:2',
             'image'=>'image|mimes:jpg,png,jpeg,gif,svg',
             'available'=>'required',
         ]);

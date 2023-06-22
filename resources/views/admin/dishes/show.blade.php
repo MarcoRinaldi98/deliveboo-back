@@ -6,9 +6,9 @@
 
             <div class="card ms-3 mt-5">
               <div class="row g-0">
-                @if ($dish->image)
+                @if ($dish->image && file_exists(public_path('storage/' . $dish->image)))
                     <div class="col-md-4">
-                      <img src="{{ asset('storage/'. $dish->image) }}" class="img-fluid rounded-start h-100" alt="{{ $dish->name }}">
+                        <img src="{{ asset('storage/'. $dish->image) }}" class="img-fluid rounded-start h-100" alt="{{ $dish->name }}">
                     </div>
                 @else
                     <div class="col-md-4">

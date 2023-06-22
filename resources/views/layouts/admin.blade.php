@@ -33,7 +33,6 @@
 
                     <div class="col-10">
                         
-                        @include('partials.error')
                         @include('partials.messages')
 
                         @yield('content')

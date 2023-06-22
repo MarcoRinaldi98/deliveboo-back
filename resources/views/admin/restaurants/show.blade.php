@@ -7,7 +7,7 @@
         @if ($restaurant->user_id == auth()->user()->id)
             <div class="card mb-3">
                 <div class="row g-0">
-                    @if ($restaurant->image)
+                    @if ($restaurant->image && file_exists(public_path('storage/' . $restaurant->image)))
                         <div class="col-md-4 p-3">
                             <img src="{{ asset('storage/'. $restaurant->image) }}" class="img-fluid rounded-start h-100" alt="{{ $restaurant->name }}">
                         </div>

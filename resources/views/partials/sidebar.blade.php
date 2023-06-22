@@ -3,23 +3,23 @@
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
           <a href="{{route('admin.dashboard')}}" class="nav-link {{Route::currentRouteName() == 'admin.dashboard'?'active':''}}">
-            Restaurant
+            Ristorante
           </a>
         </li>
         </li>
         <li class="nav-item">
           <a href="{{route('admin.dishes.index')}}" class="nav-link @if (Route::currentRouteName() == 'admin.dishes.index') active @endif">
-            Dish
+            Piatti
           </a>
         </li>
         <li class="nav-item">
           <a href="{{route('admin.orders.index')}}" class="nav-link @if (Route::currentRouteName() == 'admin.orders.index') active @endif">
-            Order
+            Ordini
           </a>
         </li>
         <li class="nav-item">
           <a href="{{route('admin.dishes.create')}}" class="nav-link @if (Route::currentRouteName() == 'admin.dishes.create') active @endif">
-            New Dishes
+            Nuovo Piatto
           </a>
         </li>
       </ul>
