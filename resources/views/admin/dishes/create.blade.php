@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form action="{{ route('admin.dishes.store')}}" method="POST">
+<form action="{{ route('admin.dishes.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <input type="hidden" name="restaurant_id" 
@@ -60,7 +60,7 @@
 
         <label for="image" class="form-label">Seleziona immagine di copertina</label>
 
-        <input type="file" class="form-control @error('image') is-invalid @enderror " id="image" name="image">
+        <input type="file" name="image" accept="image/*" class="form-control @error('image') is-invalid @enderror " id="image">
         @error('image')
             <div class="invalid-feedback">
                 {{$message}}

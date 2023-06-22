@@ -6,15 +6,15 @@
 
             <div class="card ms-3 mt-5">
               <div class="row g-0">
-                  @if ($dish->image)
-                      <div class="col-md-4">
-                          <img src="{{ asset('storage/'. $dish->image) }}" class="img-fluid rounded-start h-100" alt="{{ $dish->name }}">
-                      </div>
-                  @else
-                      <div class="col-md-4">
-                          <img src="https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png" class="img-fluid rounded-start h-100 p-3" alt="{{ $dish->name }}">
-                      </div>
-                  @endif
+                @if ($dish->image)
+                    <div class="col-md-4">
+                      <img src="{{ asset('storage/'. $dish->image) }}" class="img-fluid rounded-start h-100" alt="{{ $dish->name }}">
+                    </div>
+                @else
+                    <div class="col-md-4">
+                        <img src="https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png" class="img-fluid rounded-start h-100 p-3" alt="{{ $dish->name }}">
+                    </div>
+                @endif
                 
                 <div class="col-md-8">
                   <div class="card-body">
