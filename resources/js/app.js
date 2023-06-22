@@ -32,9 +32,12 @@ btnDelete.addEventListener('click', function () {
     const formDelete = document.getElementById('form-delete');
     formDelete.submit();
 });
+
+
 let Newform = document.getElementById('register');
 
 Newform.addEventListener('submit', function(e){
+    console.log('ciao mondo ')
     e.preventDefault();
     if(validateForm(Newform)){
         Newform.submit();
@@ -42,9 +45,8 @@ Newform.addEventListener('submit', function(e){
 })
 
 
-
 function validateForm(form) {
-    console.log(this.form)
+    console.log('ciao mondo ')
     // Effettua la validazione dei campi del modulo
     let name = form.name.value;
     let surname = form.surname.value;
@@ -141,7 +143,6 @@ function validateForm(form) {
             return false;
         }
     }
-    
     
     // Verifica se il campo "confirmPassword" è obbligatorio
     if (!confirmPassword) {
