@@ -28,4 +28,4 @@ Route::get('/dishes', [DishController::class, 'ApiDish']);
 
 Route::get('/types', [TypeController::class, 'ApiType']);
 
-Route::get('/dish/{id}', [DishController::class, 'SingleDishShow']);
+Route::get('/dish/{id}', [DishController::class, 'DishShow']);

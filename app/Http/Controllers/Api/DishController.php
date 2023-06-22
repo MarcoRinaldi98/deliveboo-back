@@ -11,7 +11,7 @@ class DishController extends Controller
     public function ApiDish()
     {
 
-        $dishes = Dish::all()->paginate(6);
+        $dishes = Dish::all();
 
         return response()->json([
             'success' => true,
@@ -19,9 +19,9 @@ class DishController extends Controller
         ]);
     }
 
-    public function SingleDishShow($id)
+    public function DishShow($restaurant_id)
     {
-        $dish = Dish::where('id', $id)->get();
+        $dish = Dish::where('restaurant_id', $restaurant_id)->get();
 
         return response()->json([
             'success' => true,
