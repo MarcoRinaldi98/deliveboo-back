@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\RegisterUserController;
 use Illuminate\Http\Request;
 use App\Models\Dish;
 use App\Models\Order;
@@ -72,8 +73,12 @@ class DishController extends Controller
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function show(Dish $dish)
+    public function show(Dish $dish, Restaurant $restaurant)
     {
+        if($dish->restaurant_id !== auth()->user()->id){
+            abort(403, 'Accesso non autorizzato');
+        }
+
         return view('admin.dishes.show', compact('dish'));
     }
 
@@ -86,6 +91,11 @@ class DishController extends Controller
     public function edit(Dish $dish, Restaurant $restaurant)
     {
         $restaurants = Restaurant::all();
+
+        if($dish->restaurant_id !== auth()->user()->id){
+            abort(403, 'Accesso non autorizzato');
+        }
+        
         return view('admin.dishes.edit', compact('dish', 'restaurants'));
     }
 

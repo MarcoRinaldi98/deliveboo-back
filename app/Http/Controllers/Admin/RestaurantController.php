@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Restaurant\StoreRestaurantRequest;
 use App\Http\Requests\Restaurant\UpdateRestaurantRequest;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use App\Models\Type;
@@ -63,9 +64,14 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function show(Restaurant $restaurant)
+    public function show(Restaurant $restaurant,RegisteredUserController $user)
     {
         $restaurants = Restaurant::all();
+
+        if($restaurant->user_id !== auth()->user()->id){
+            abort(403, 'Accesso non autorizzato');
+        }
+
         return view('admin.restaurants.show', compact('restaurants'));
     }
 
@@ -75,8 +81,11 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function edit(Restaurant $restaurant)
+    public function edit(Restaurant $restaurant, RegisteredUserController $user)
     {
+        if($restaurant->user_id !== auth()->user()->id){
+            abort(403, 'Accesso non autorizzato');
+        }
         return view('admin.restaurants.edit', compact('restaurant'));
     }
 
