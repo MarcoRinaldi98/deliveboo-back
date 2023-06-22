@@ -11,7 +11,7 @@ class DishController extends Controller
     public function ApiDish()
     {
 
-        $dishes = Dish::all();
+        $dishes = Dish::all()->paginate(6);
 
         return response()->json([
             'success' => true,

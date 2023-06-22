@@ -10,7 +10,7 @@ class RestaurantController extends Controller
 {
     public function ApiRestaurant()
     {
-        $restaurants = Restaurant::with('types')->get();
+        $restaurants = Restaurant::with('types')->paginate(6);
 
         return response()->json([
             'success' => true,
