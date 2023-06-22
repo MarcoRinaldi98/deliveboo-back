@@ -30,7 +30,7 @@
         <input type="text" class="form-control @error('price') is-invalid @enderror " id="price" name="price" value="{{old('price',$dish->price)}}">
         @error('price')
             <div class="invalid-feedback">
-                {{$message}}
+                <div class="alert alert-danger">{{ $message }}</div>
             </div>
         @enderror
     </div>
@@ -40,7 +40,7 @@
         <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{old('description', $dish->description)}}</textarea>
         @error('description')
             <div class="invalid-feedback">
-                {{$message}}
+                <div class="alert alert-danger">{{ $message }}</div>
             </div>
         @enderror
     </div>
@@ -53,7 +53,7 @@
         </select>
         @error('available')
             <div class="invalid-feedback">
-                {{$message}}
+                <div class="alert alert-danger">{{ $message }}</div>
             </div>
         @enderror
     </div>
@@ -73,7 +73,7 @@
 
         @error('image')
             <div class="invalid-feedback">
-                {{$message}}
+                <div class="alert alert-danger">{{ $message }}</div>
             </div>
         @enderror
     </div>

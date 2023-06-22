@@ -100,11 +100,11 @@ class DishController extends Controller
     public function update(Request $request, Dish $dish, Restaurant $restaurant)
     {
         $data = $request->validate([
-            'name' => 'nullable',
-            'description' => 'nullable',
-            'price' => 'nullable',
-            'image' => 'nullable',
-            'available' => 'nullable',
+            'name'=>'required|string|max:150',
+            'description'=>'required|text:max:255',
+            'price'=>'required|',
+            'image'=>'image|mimes:jpg,png,jpeg,gif,svg',
+            'available'=>'required',
         ]);
 
         if ($request->hasFile('image')) {
