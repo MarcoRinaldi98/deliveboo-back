@@ -26,32 +26,54 @@ deleteButtons.forEach(button => {
 });
 
 
-const btnDelete = document.getElementById('btn-delete');
+// const btnDelete = document.getElementById('btn-delete');
 
-btnDelete.addEventListener('click', function () {
-    const formDelete = document.getElementById('form-delete');
-    formDelete.submit();
-});
+// btnDelete.addEventListener('click', function () {
+//     const formDelete = document.getElementById('form-delete');
+//     formDelete.submit();
+// });
 
 
 let Newform = document.getElementById('register');
 
-Newform.addEventListener('submit', function(e){
-    console.log('ciao mondo ')
+// Newform.addEventListener('submit', function(e){
+//     e.preventDefault();
+//     if(validateForm(Newform)){
+//         Newform.submit();
+//     }
+// })
+
+Newform.addEventListener('submit', function(e) {
     e.preventDefault();
-    if(validateForm(Newform)){
-        Newform.submit();
+    if (validateForm(Newform)) {
+        var formData = new FormData(Newform);
+
+        fetch('/url-del-tuo-endpoint-laravel', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Il modulo è stato inviato con successo, puoi gestire la risposta qui
+            } else {
+                // Si è verificato un errore durante l'invio del modulo, puoi gestire l'errore qui
+            }
+        })
+        .catch(error => {
+            // Si è verificato un errore durante la richiesta, puoi gestire l'errore qui
+        });
     }
-})
+});
 
 
 function validateForm(form) {
-    console.log('ciao mondo ')
+
     // Effettua la validazione dei campi del modulo
     let name = form.name.value;
     let surname = form.surname.value;
     let email = form.email.value;
     let password = form.password.value;
+    let confirmPassword = form.password_confirmation.value;
     let restaurant_name = form.restaurant_name.value;
     let address = form.address.value;
     let vat = form.vat.value;
@@ -78,13 +100,17 @@ function validateForm(form) {
         return false;
     }
     
+    if(vat.length !== 11){
+        alert('Il campo partita iva deve contenere 11 caratteri.')
+    }
+
     if (phone.length < 10) {
-        alert("Il campo non può contenere meno di 10 caratteri.");
+        alert("Il campo telefono non può contenere meno di 10 caratteri.");
         return false;
     }
 
     if (phone.length > 15) {
-        alert("Il campo non può contenere più di 15 caratteri.");
+        alert("Il campo telefono non può contenere più di 15 caratteri.");
         return false;
     }
     
