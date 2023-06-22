@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                    <form id="register" method="POST" action="{{ route('register') }}" enctype="multipart/form-data" onsubmit="return validateForm(this)">
                         @csrf
 
                         <div class="mb-4 row">
