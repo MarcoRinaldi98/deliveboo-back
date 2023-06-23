@@ -23,7 +23,7 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Prezzo</label>
-            <input type="text" class="form-control @error('price') is-invalid @enderror " id="price" name="price"
+            <input type="number" class="form-control @error('price') is-invalid @enderror " id="price" name="price"
                 value="{{ old('price', $dish->price) }}">
             @error('price')
                 <div class="invalid-feedback">
@@ -45,8 +45,8 @@
         <div class="mb-3">
             <label for="available" class="form-label">Disponibile</label>
             <select class="form-select @error('available') is-invalid @enderror" name="available" id="available">
-                <option @selected(old('available') == 0) value="0">No</option>
                 <option @selected(old('available') == 1) value="1">Si</option>
+                <option @selected(old('available') == 0) value="0">No</option>
             </select>
             @error('available')
                 <div class="invalid-feedback">
