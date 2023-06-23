@@ -26,12 +26,12 @@ class UpdateRestaurantRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:150', Rule::unique('restaurants')->ignore($this->restaurant)],
-            'image' => 'nullable|image|max:1024',
-            'description' => 'required',
-            'address' => 'required',
-            'vat' => 'required|min:11',
-            'phone' => 'regex:/^[0-9]{10}$/|required',
-            'types' => 'exists:types,id',
+            'surname' => ['required', 'string', 'max:255', 'alpha'],
+            'address' => ['required', 'string', 'max:50'],
+            'phone' => ['required', 'string', 'max:15'],
+            'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif,svg'],
+            'description' => ['nullable', 'min:10', 'max:65000'],
+            'types.*' => ['exists:types,id'],
         ];
     }
 }

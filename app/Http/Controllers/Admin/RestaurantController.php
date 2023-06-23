@@ -82,14 +82,19 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function edit(Restaurant $restaurant, RegisteredUserController $user)
+    public function edit(Restaurant $restaurant, RegisteredUserController $user, Type $types)
     {
-        if($restaurant->user_id !== auth()->user()->id){
+        if ($restaurant->user_id !== auth()->user()->id) {
             abort(403, 'Accesso non autorizzato');
         }
-        return view('admin.restaurants.edit', compact('restaurant'));
+    
+        $types = Type::all();
+    
+        // Recupera i tipi già selezionati per il ristorante
+        $selectedTypes = $restaurant->types()->pluck('types.id')->toArray();
+    
+        return view('admin.restaurants.edit', compact('restaurant', 'types', 'selectedTypes'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -99,7 +104,8 @@ class RestaurantController extends Controller
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
-        $request->validate([
+
+            $request->validate([
             'name' => ['required', 'string', 'max:255', 'alpha'],
             'surname' => ['required', 'string', 'max:255', 'alpha'],
             'address' => ['required', 'string', 'max:50'],

@@ -35,15 +35,17 @@ const btnDelete = document.getElementById('btn-delete');
 
 
 let Newform = document.getElementById('register');
+if(Newform){
 
-Newform.addEventListener('submit', function(e) {
-    e.preventDefault();
-    if (validateForm(Newform)) {
-        Newform.submit();
-    } else {
-        return false;
-    }
-});
+    Newform.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (validateForm(Newform)) {
+            Newform.submit();
+        } else {
+            return false;
+        }
+    });
+}
 
 
 

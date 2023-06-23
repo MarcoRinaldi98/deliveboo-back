@@ -8,7 +8,7 @@
         <a href="{{ route('admin.restaurants.show',['restaurant' => $restaurant->id]) }}" class="btn btn-secondary">Torna alla Vista</a>
     </div>
 
-    <form method="POST" action="{{ route('admin.restaurants.update',['restaurant'=> $restaurant->id]) }}" enctype="multipart/form-data" onsubmit="return validateForm(this)">
+    <form method="POST" action="{{ route('admin.restaurants.update',['restaurant'=> $restaurant->id]) }}" enctype="multipart/form-data" ">
 
         @csrf
         @method('PUT')
@@ -47,7 +47,7 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione (max 1000)(opzionale):</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description', $restaurant->description) }}</textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"></textarea>
             @error('description')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -72,6 +72,22 @@
                 </div>
             @enderror
         </div>
+        
+        <div class="mb-4 row">
+            @foreach($types as $type)
+                <div>
+                    <label for="{{$type->id}}" class="col-md-4 col-form-label text-md-right">{{$type->name}}</label>
+                    <input id="{{$type->id}}" class="@error('types') is-invalid @enderror" type="checkbox" name="types[]" value="{{$type->id}}" @if(collect(old('types', $selectedTypes))->contains($type->id)) checked @endif>
+                </div>
+            @endforeach
+            @error('types')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+        
+        
 
         <div class="py-3">
             <button type="submit" class="btn btn-primary">Salva</button>
