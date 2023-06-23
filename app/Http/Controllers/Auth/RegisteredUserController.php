@@ -15,6 +15,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class RegisteredUserController extends Controller
 {
@@ -34,12 +35,25 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255', 'alpha'],
             'surname' => ['required', 'string', 'max:255', 'alpha'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'restaurant_name'=>['required', 'string', 'max:50'],
+            'address'=>['required', 'string', 'max:50'],
+            'vat'=>['required', 'unique:restaurants,vat', 'string', 'numeric'],
+            'phone'=>['required', 'string', 'max:15'],
+            'image'=>['nullable','image','mimes:jpg,png,jpeg,gif,svg'],
+            'description'=>['nullable','min:10','max:65000'],
+            'types[]'=>['exist:types,id']
         ]);
+        
+        //blocca l'invio dei dati se la validazione non riesce
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -50,15 +64,6 @@ class RegisteredUserController extends Controller
 
         $UserID = $user->id;
 
-        $request->validate([
-            'restaurant_name'=>['required', 'string', 'max:50'],
-            'address'=>['required', 'string', 'max:50'],
-            'vat'=>['required', 'unique:restaurants,vat', 'string', 'numeric'],
-            'phone'=>['required', 'string', 'max:15'],
-            'image'=>['nullable','image','mimes:jpg,png,jpeg,gif,svg'],
-            'description'=>['nullable','min:10','max:65000'],
-            'types[]'=>['exist:types,id']
-        ]);
 
         $restaurant = Restaurant::create([
             'name'=> $request->input('restaurant_name'),

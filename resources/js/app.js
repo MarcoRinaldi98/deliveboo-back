@@ -26,44 +26,18 @@ deleteButtons.forEach(button => {
 });
 
 
-// const btnDelete = document.getElementById('btn-delete');
-
-// btnDelete.addEventListener('click', function () {
-//     const formDelete = document.getElementById('form-delete');
-//     formDelete.submit();
-// });
-
 
 let Newform = document.getElementById('register');
-
-// Newform.addEventListener('submit', function(e){
-//     e.preventDefault();
-//     if(validateForm(Newform)){
-//         Newform.submit();
-//     }
-// })
 
 Newform.addEventListener('submit', function(e) {
     e.preventDefault();
     if (validateForm(Newform)) {
-        var formData = new FormData(Newform);
-
-        fetch('/url-del-tuo-endpoint-laravel', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                // Il modulo è stato inviato con successo, puoi gestire la risposta qui
-            } else {
-                // Si è verificato un errore durante l'invio del modulo, puoi gestire l'errore qui
-            }
-        })
-        .catch(error => {
-            // Si è verificato un errore durante la richiesta, puoi gestire l'errore qui
-        });
+        Newform.submit();
+    } else {
+        return false;
     }
 });
+
 
 
 function validateForm(form) {
@@ -90,7 +64,7 @@ function validateForm(form) {
     
     // Validazione: testo
     if (!/^[a-zA-Z]+$/.test(name) || !/^[a-zA-Z]+$/.test(surname)) {
-        alert("Il campo deve contenere solo caratteri alfabetici.");
+        alert("Il campo nome e cognome devono contenere solo caratteri alfabetici.");
         return false;
     }
     
@@ -100,8 +74,9 @@ function validateForm(form) {
         return false;
     }
     
-    if(vat.length !== 11){
+    if(vat.length < 11 || vat.length > 11){
         alert('Il campo partita iva deve contenere 11 caratteri.')
+        return false;
     }
 
     if (phone.length < 10) {
@@ -139,22 +114,7 @@ function validateForm(form) {
         return false
     }
     
-    if(image){
-        
-        // Verifica se il campo "image" è un'immagine
-        if (!/^image\//.test(image.type)) {
-            alert("Il campo immagine deve essere un file di immagine.");
-            return false;
-        }
-        
-        // Verifica le estensioni consentite per il campo "image"
-        var allowedExtensions = ["jpg", "jpeg", "png", "gif", "svg"];
-        var fileExtension = image.name.split(".").pop().toLowerCase();
-        if (!allowedExtensions.includes(fileExtension)) {
-            alert("Il campo immagine deve essere un file con estensione jpg, jpeg, png, gif o svg.");
-            return false;
-        }
-    }
+    
 
     if (types.length == 0) {
         alert("Seleziona almeno un tipo valido.");
