@@ -21,7 +21,7 @@ class RestaurantController extends Controller
     {
         $restaurants = Restaurant::whereHas('types', function ($query) use ($type_id) {
             $query->where('type_id', $type_id);
-        })->get();
+        })->paginate(6);
 
         return response()->json($restaurants);
     }
