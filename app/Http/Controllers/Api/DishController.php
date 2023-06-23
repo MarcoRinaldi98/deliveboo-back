@@ -15,7 +15,7 @@ class DishController extends Controller
 
         return response()->json([
             'success' => true,
-            'response' => $dishes,
+            'results' => $dishes,
         ]);
     }
 
