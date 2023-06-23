@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                    <form id="register" method="POST" action="{{ route('register') }}" enctype="multipart/form-data" onsubmit="return validateForm(this)">
                         @csrf
 
                         <div class="mb-4 row">
@@ -71,7 +71,7 @@
                             <label for="vat" class="col-md-4 col-form-label text-md-right">{{ __('Partita Iva') }}</label>
 
                             <div class="col-md-6">
-                                <input id="vat" type="text" class="form-control @error('vat') is-invalid @enderror" name="vat" value="{{ old('vat') }}" required autocomplete="vat" autofocus>
+                                <input id="vat" type="number" class="form-control @error('vat') is-invalid @enderror" name="vat" value="{{ old('vat') }}" required autocomplete="vat" autofocus>
 
                                 @error('vat')
                                 <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Numero di telefono') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                                <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
 
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
