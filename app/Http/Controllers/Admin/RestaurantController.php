@@ -108,6 +108,20 @@ class RestaurantController extends Controller
             $form_data['image'] = $path;
         }
 
+        if($restaurant->vat !== $request->vat){    
+            $validator = Validator::make($request->all(), [
+                'vat'=>['required', 'unique:restaurants,vat', 'string', 'numeric'],
+            ]);
+        }else{
+            $validator = Validator::make($request->all(), [
+                'vat'=>['required', 'string', 'numeric'],
+            ]);
+        }
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $restaurant->update($form_data);
 
         return redirect()->route('admin.restaurants.show', ['restaurant' => $restaurant->id])->with('status', 'Restaurant aggiornato con successo');

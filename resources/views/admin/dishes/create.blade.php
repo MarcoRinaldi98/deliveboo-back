@@ -16,7 +16,7 @@
     >    
     <div class="mb-3">
         <label for="name" class="form-label">Titolo</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror " id="name" name="name" value="{{old('name')}}">
+        <input type="text" class="form-control @error('name') is-invalid @enderror " required id="name" name="name" value="{{old('name')}}">
         @error('name')
             <div class="invalid-feedback">
                 {{$message}}
@@ -25,7 +25,7 @@
     </div>
     <div class="mb-3">
         <label for="price" class="form-label">Prezzo</label>
-        <input type="text" class="form-control @error('price') is-invalid @enderror " id="price" name="price" value="{{old('price')}}">
+        <input type="number" class="form-control @error('price') is-invalid @enderror " required id="price" name="price" value="{{old('price')}}">
         @error('price')
             <div class="invalid-feedback">
                 {{$message}}
@@ -47,7 +47,7 @@
         <label for="available" class="form-label">Disponibile</label>
         <select class="form-select @error('available') is-invalid @enderror" name="available" id="available">
             <option @selected(old('available')== 0) value="0">No</option>
-            <option @selected(old('available')== 1) value="1">Si</option>
+            <option @selected(old('available')== 1) selected value="1">Si</option>
         </select>
         @error('available')
             <div class="invalid-feedback">
