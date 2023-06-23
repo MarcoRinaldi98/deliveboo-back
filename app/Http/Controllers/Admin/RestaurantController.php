@@ -34,6 +34,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
+        
         return view('admin.restaurants.create');
     }
 
@@ -98,7 +99,23 @@ class RestaurantController extends Controller
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'alpha'],
+            'surname' => ['required', 'string', 'max:255', 'alpha'],
+            'address' => ['required', 'string', 'max:50'],
+            'phone' => ['required', 'string', 'max:15'],
+            'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif,svg'],
+            'description' => ['nullable', 'min:10', 'max:65000'],
+            'types.*' => ['exists:types,id'],
+        ]);     
+        
         $form_data = $request->validated();
+        //blocca l'invio dei dati se la validazione non riesce
+        if ($form_data->fails()) {
+            return redirect()->back()->withErrors($form_data)->withInput();
+        }
+
+
 
         if ($request->hasFile('image')) {
             if ($restaurant->image) {

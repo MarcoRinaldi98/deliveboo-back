@@ -8,7 +8,7 @@
         <a href="{{ route('admin.restaurants.show',['restaurant' => $restaurant->id]) }}" class="btn btn-secondary">Torna alla Vista</a>
     </div>
 
-    <form method="POST" action="{{ route('admin.restaurants.update',['restaurant'=> $restaurant->id]) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.restaurants.update',['restaurant'=> $restaurant->id]) }}" enctype="multipart/form-data" onsubmit="return validateForm(this)">
 
         @csrf
         @method('PUT')
@@ -23,7 +23,7 @@
 
         <div class="mb-3">
             <label for="vat" class="form-label">Partita IVA:</label>
-            <input type="text" class="form-control @error('vat') is-invalid @enderror" required id="vat" name="vat" value="{{ old('vat', $restaurant->vat) }}">
+            <input type="number" class="form-control @error('vat') is-invalid @enderror" required id="vat" name="vat" value="{{ old('vat', $restaurant->vat) }}">
             @error('vat')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -39,7 +39,7 @@
 
         <div class="mb-3">
             <label for="phone" class="form-label">Numero Di telefono:</label>
-            <input type="text" class="form-control @error('phone') is-invalid @enderror" required id="phone" name="phone" value="{{ old('phone', $restaurant->phone) }}">
+            <input type="number" class="form-control @error('phone') is-invalid @enderror" required id="phone" name="phone" value="{{ old('phone', $restaurant->phone) }}">
             @error('phone')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -47,7 +47,7 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione (max 1000)(opzionale):</label>
-            <textarea class="form-control @error('description') is-invalid @enderror"  id="description" name="description">{{ old('description', $restaurant->description) }}</textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description', $restaurant->description) }}</textarea>
             @error('description')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

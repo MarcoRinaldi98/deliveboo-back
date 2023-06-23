@@ -23,7 +23,7 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Prezzo</label>
-            <input type="number" class="form-control @error('price') is-invalid @enderror " id="price" name="price"
+            <input type="number" min='0.00' max='9999.99' step='0.01' class="form-control @error('price') is-invalid @enderror " id="price" name="price"
                 value="{{ old('price', $dish->price) }}">
             @error('price')
                 <div class="invalid-feedback">
