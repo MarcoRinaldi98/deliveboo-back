@@ -53,7 +53,12 @@ class RestaurantController extends Controller
             $data['image'] = $path;
         }
     
-        
+        $restaurant = Restaurant::create($form_data);
+
+        if ($request->has('types')) {
+            $restaurant->types()->attach($request->types);
+        }
+
         $newRestaurant = Restaurant::create($form_data);
 
         return redirect()->route('admin.restaurants.show', ['restaurant' => $newRestaurant->id])->with('status', 'Restaurant aggiunto con successo');;
@@ -92,6 +97,7 @@ class RestaurantController extends Controller
     
         // Recupera i tipi già selezionati per il ristorante
         $selectedTypes = $restaurant->types()->pluck('types.id')->toArray();
+
     
         return view('admin.restaurants.edit', compact('restaurant', 'types', 'selectedTypes'));
     }
@@ -111,6 +117,7 @@ class RestaurantController extends Controller
             'address' => ['required', 'string', 'max:50'],
             'phone' => ['required', 'string', 'max:15'],
             'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif,svg'],
+            'vat'=>['required', 'max:11', 'min:11'],
             'description' => ['nullable', 'min:10', 'max:65000'],
             'types.*' => ['exists:types,id'],
         ]);     
@@ -120,8 +127,6 @@ class RestaurantController extends Controller
         if ($form_data->fails()) {
             return redirect()->back()->withErrors($form_data)->withInput();
         }
-
-
 
         if ($request->hasFile('image')) {
             if ($restaurant->image) {
@@ -144,6 +149,9 @@ class RestaurantController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
+
+        $restaurant->types()->sync($request->types);
 
         $restaurant->update($form_data);
 

@@ -29,6 +29,7 @@ class UpdateRestaurantRequest extends FormRequest
             'surname' => ['required', 'string', 'max:255', 'alpha'],
             'address' => ['required', 'string', 'max:50'],
             'phone' => ['required', 'string', 'max:15'],
+            'vat' => ['required', 'max:11', 'min:11'],
             'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif,svg'],
             'description' => ['nullable', 'min:10', 'max:65000'],
             'types.*' => ['exists:types,id'],
