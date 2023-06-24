@@ -42,7 +42,7 @@
         </main>
 
     </div>
-    @include('partials.error')
+    
 </body>
 
 </html>

@@ -25,12 +25,11 @@ class StoreRestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:150|unique:restaurants',
-            'image' => 'nullable|image|max:1024',
-            'description' => 'nullable',
-            'address' => 'required',
-            'vat' => 'required|min:11',
-            'phone' => 'phone|min:9',
+            'address' => ['required', 'string', 'max:50'],
+            'phone' => 'required|min:9|max:15',
+            'vat' => ['required', 'max:11', 'min:11'],
+            'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif,svg'],
+            'description' => ['nullable', 'min:10', 'max:500'],
             'types' => 'exists:types,id',
         ];
         
