@@ -10,6 +10,7 @@
 
     <form method="POST" action="{{ route('admin.restaurants.update',['restaurant'=> $restaurant->id]) }}" enctype="multipart/form-data" ">
 
+        {{-- {{dd($types)}} --}}
         @csrf
         @method('PUT')
 
@@ -47,7 +48,7 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione (max 1000)(opzionale):</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"></textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description', $restaurant->description) }}</textarea>
             @error('description')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -90,7 +91,7 @@
         
 
         <div class="py-3">
-            <button type="submit" class="btn btn-primary">Salva</button>
+            <button type="submit" class="btn btn-primary" id="prova">Salva</button>
         </div>
     </form>
 
