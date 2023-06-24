@@ -31,7 +31,16 @@ class UpdateRestaurantRequest extends FormRequest
             'vat' => ['required', 'max:11', 'min:11'],
             'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif,svg'],
             'description' => ['nullable', 'min:10', 'max:65000'],
-            'types.*' => ['exists:types,id'],
+            'types.*' => ['required','exists:types,id'],
         ];
+    }
+
+        public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if (!$this->has('types') || empty($this->input('types'))) {
+                $validator->errors()->add('types', 'Devi selezionare almeno un tipo.');
+            }
+        });
     }
 }

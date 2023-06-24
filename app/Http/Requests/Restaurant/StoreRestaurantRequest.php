@@ -33,5 +33,14 @@ class StoreRestaurantRequest extends FormRequest
             'phone' => 'phone|min:9',
             'types' => 'exists:types,id',
         ];
+        
+    }
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if (!$this->has('types') || empty($this->input('types'))) {
+                $validator->errors()->add('types', 'Devi selezionare almeno un tipo.');
+            }
+        });
     }
 }

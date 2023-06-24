@@ -48,6 +48,12 @@ class RestaurantController extends Controller
     {
         $form_data = $request->validated();
 
+        if ($form_data->fails()) {
+            return redirect()->back()->withErrors($form_data)->withInput();
+        }
+        
+        $form_data = $form_data->validated();
+
         if ($request->hasFile('image')) {
             $path = Storage::put('cover', $request->image);
             $form_data['image'] = $path;

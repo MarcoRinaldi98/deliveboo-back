@@ -10,7 +10,6 @@
 
     <form method="POST" action="{{ route('admin.restaurants.update',['restaurant'=> $restaurant->id]) }}" enctype="multipart/form-data" ">
 
-        {{-- {{dd($types)}} --}}
         @csrf
         @method('PUT')
 
@@ -18,7 +17,9 @@
             <label for="name" class="form-label">Nome:</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" required id="name" name="name" value="{{ old('name', $restaurant->name) }}">
             @error('name')
-                <div class="alert alert-danger">{{ $message }}</div>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
             @enderror
         </div>
 
