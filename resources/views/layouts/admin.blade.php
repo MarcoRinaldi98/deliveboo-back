@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="col-10">
-                        
+
                         @include('partials.messages')
 
                         @yield('content')
@@ -42,7 +42,7 @@
         </main>
 
     </div>
-    
+
 </body>
 
 </html>
