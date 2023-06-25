@@ -30,7 +30,7 @@ class UpdateRestaurantRequest extends FormRequest
             'phone' => 'required|min:9|max:15',
             'vat' => ['required', 'max:11', 'min:11'],
             'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif,svg'],
-            'description' => ['nullable', 'min:10', 'max:500'],
+            'description' => ['nullable', 'min:10', 'max:1000'],
             'types.*' => ['required','exists:types,id'],
         ];
     }
