@@ -5,7 +5,9 @@
 @foreach ($restaurants as $restaurant)
     @auth
         @if ($restaurant->user_id == auth()->user()->id)
+            
             <div class="card mb-3">
+                <div class="text-center fs-2 infoshow">INFO RISTORANTE</div>
                 <div class="row g-0">
                     @if ($restaurant->image && file_exists(public_path('storage/' . $restaurant->image)))
                         <div class="col-md-4 p-3">

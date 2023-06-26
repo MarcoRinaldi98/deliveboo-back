@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-shrink-0 p-2 bg-body-tertiary border-end sidebar">
+<div class="sidebar d-flex flex-column flex-shrink-0 p-2  sidebar">
     <div class="sidebar_top">
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">

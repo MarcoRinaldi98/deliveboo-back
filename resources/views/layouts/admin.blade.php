@@ -14,6 +14,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="../../scss/app.scss" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../../public/favicon.ico">
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
@@ -36,6 +38,10 @@
                         @include('partials.messages')
 
                         @yield('content')
+
+                        @push('styles')
+                            
+                        @endpush    
                     </div>
                 </div>
             </div>
