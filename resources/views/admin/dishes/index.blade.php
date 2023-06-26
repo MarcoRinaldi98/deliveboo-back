@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-<table class="table table-borderless">
+<table class=" table ">
     <thead>
-      <tr>
-        <th scope="col">#</th>
+      <tr >
+        <th scope="col" class="dishesIndex">#</th>
         <th scope="col">Nome</th>
         <th scope="col">Azioni</th>
       </tr>

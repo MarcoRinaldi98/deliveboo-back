@@ -6,6 +6,119 @@
     box-sizing: border-box;
 };
 
+body {
+    background-image: url(../../public/back1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+// Header
+
+.nav-link:hover {
+    transform: scale(1.2);
+    transition: all 0.3s ease-in;
+    color: #f3a446;
+
+}
+
+.headRegister, .nav-link{
+    color: #f3a446;
+}
 .sidebar{
     height: 100vh;
+}
+
+.logo {
+
+    width: 100px;
+}
+
+#navbarDropdown {
+    color: #f3a446;
+}
+
+.dropdown-item {
+    color: #f3a446;
+}
+
+.dropdown-menu {
+    background-color: black;
+    border: 2px solid #f3a446;
+    overflow: hidden;
+}
+
+.dropdown-item:hover {
+    background-color: black;
+    font-size: 19px;
+    transform: translatex(10%);
+    
+    color: #f3a446;
+    transition: all 0.3s ease-in-out;
+}
+
+
+nav.navbar {
+    border-bottom: 6px solid #f3a446;
+    border-bottom-right-radius: 30%;
+    border-bottom-left-radius: 30%;
+}
+
+// fine Header
+
+
+// Main
+
+// Sidebar
+.sidebar {
+    background-color: transparent;
+    border: 2px solid #f3a446;
+    margin-top: 10%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.sidebar a {
+    color: #f3a446;
+}
+
+.sidebar a:hover {
+
+    font-size: 22px;
+    transform: translatex(10%);
+    transition: all 0.3s ease-in-out;
+    color: #f3a446;
+}
+
+.active {
+    border: 3px solid #f3a446;
+}
+
+
+// register blade
+
+.headRegister  {
+    background-color: transparent;
+}
+
+.card {
+    margin-top: 40px;
+    background-color: transparent;
+
+}
+
+.card * {
+    color: #f9b96c;
+}
+
+.inputColor {
+    color: black;
+}
+
+.dishesIndex {
+    color: #f3a446;
+}
+
+th {
+    background-color: transparent;
 }
