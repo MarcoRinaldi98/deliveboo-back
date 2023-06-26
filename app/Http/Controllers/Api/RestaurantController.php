@@ -25,6 +25,9 @@ class RestaurantController extends Controller
             $query->whereIn('type_id', $typeIds);
         })->paginate(6);
 
-        return response()->json($restaurants);
+        return response()->json([
+            'success' => true,
+            'results' => $restaurants
+        ]);
     }
 }
