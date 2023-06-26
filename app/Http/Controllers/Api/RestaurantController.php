@@ -17,10 +17,12 @@ class RestaurantController extends Controller
             'results' => $restaurants
         ]);
     }
-    public function getRestaurantsByType($type_id)
+    public function getRestaurantsByTypes(Request $request)
     {
-        $restaurants = Restaurant::whereHas('types', function ($query) use ($type_id) {
-            $query->where('type_id', $type_id);
+        $typeIds = $request->input('typeIds', []);
+
+        $restaurants = Restaurant::whereHas('types', function ($query) use ($typeIds) {
+            $query->whereIn('type_id', $typeIds);
         })->paginate(6);
 
         return response()->json($restaurants);
