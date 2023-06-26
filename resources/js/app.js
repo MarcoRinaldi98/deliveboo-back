@@ -66,88 +66,106 @@ function validateForm(form) {
 
     if (name.trim() === '' || surname.trim() === '' || email.trim() === '' || password.trim() === '' ||
     restaurant_name.trim() === '' || address.trim() === '' || vat.trim() === '' || phone.trim() === '') {
-    alert("Il campo è obbligatorio.");
-    return false;
-}
+        let errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(function(element) {
+            element.textContent = "Il campo è obbligatorio.";
+        });
+        return false;
+    }
 
     
     // Validazione: testo
     if (!/^[a-zA-Z]+$/.test(name) || !/^[a-zA-Z]+$/.test(surname)) {
-        alert("Il campo nome e cognome devono contenere solo caratteri alfabetici.");
+        let errorMessages = document.querySelectorAll('.error-name');
+            errorMessages.forEach(function(element) {
+            element.textContent = "Il campo nome e cognome devono contenere solo caratteri alfabetici.";
+        });
         return false;
     }
     
     // Validazione: lunghezza massima di 255 caratteri
     if (name.length > 255 || surname.length > 255 || email.length > 255) {
-        alert("Il campo non può superare i 255 caratteri.");
+        let errorMessages = document.querySelectorAll('.error-text');
+            errorMessages.forEach(function(element) {
+            element.textContent = "Il campo non può superare i 255 caratteri.";
+        });
         return false;
     }
     
     if(vat.length < 11 || vat.length > 11){
-        alert('Il campo partita iva deve contenere 11 caratteri.')
+        document.getElementById('error-vat').textContent = "Deve avere almeno 11 caratteri.";
         return false;
     }
 
     if (phone.length < 10) {
-        alert("Il campo telefono non può contenere meno di 10 caratteri.");
+        let errorMessages = document.querySelectorAll('.error-phone-min');
+            errorMessages.forEach(function(element) {
+            element.textContent = "Il campo telefono non può contenere meno di 10 caratteri.";
+        });
         return false;
     }
 
     if (phone.length > 15) {
-        alert("Il campo telefono non può contenere più di 15 caratteri.");
+        let errorMessages = document.querySelectorAll('.error-phone-max');
+            errorMessages.forEach(function(element) {
+            element.textContent = "Il campo telefono non può contenere più di 15 caratteri.";
+        });
         return false;
     }
     
     if (restaurant_name.length > 50 || address.length > 50) {
-        alert("Il campo deve contenere al massimo 50 caratteri.");
+        let errorMessages = document.querySelectorAll('.error-length');
+            errorMessages.forEach(function(element) {
+            element.textContent = "Il campo deve contenere al massimo 50 caratteri.";
+        });
         return false;
     }
     
-    if (typeof surname !== "string" || typeof surname !== "string" || typeof email !== "string" ||
+    if (typeof name !== "string" || typeof surname !== "string" || typeof email !== "string" ||
         typeof restaurant_name !== "string" || typeof address !== "string" || typeof vat !== "string" ||
         typeof phone !== "string") {
-        alert("Il campo deve essere una stringa.");
-        return false;
-    }
-    
-    // Verifica se il campo "email" è una stringa
-    if (typeof email !== "string") {
-        alert("Il campo email deve essere una stringa.");
+        let errorMessages = document.querySelectorAll('.error-string');
+            errorMessages.forEach(function(element) {
+            element.textContent = "Il campo deve essere una stringa.";
+        });
         return false;
     }
 
     // Verifica il formato dell'email utilizzando una regular expression
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        alert("Inserisci un indirizzo email valido.");
+        document.getElementById('error-email').textContent = "Inserisci un email valida con la @ (ex.test@test.it).";
         return false
     }
     
     
 
     if (types.length == 0) {
-        alert("Seleziona almeno un tipo valido.");
+        document.getElementById('error-type').textContent = "Inserire almeno un tipo.";
         return false;
     }
     
-    var validTypes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    let validTypes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     
-    for (var i = 0; i < types.length; i++) {
+    for (let i = 0; i < types.length; i++) {
         if (!validTypes.includes(parseInt(types[i]))) {
-            alert("Uno o più tipi selezionati non sono validi.");
+            document.querySelector('.error-types').textContent = "Uno o più tipi selezionati non sono validi.";
             return false;
         }
     }
     
     // Verifica se il campo "confirmPassword" è obbligatorio
     if (!confirmPassword) {
-        alert("Il campo conferma password è obbligatorio.");
+        document.getElementById('error-verify').textContent = "Uno o più tipi selezionati non sono validi.";
         return false;
     }
 
     // Verifica se la password coincide con la conferma della password
     if (password !== confirmPassword) {
-        alert("La password e la conferma della password non corrispondono.");
+        let errorMessages = document.querySelectorAll('.error-password');
+            errorMessages.forEach(function(element) {
+            element.textContent = "La password e la conferma della password non corrispondono.";
+        });
         return false;
     }
     
