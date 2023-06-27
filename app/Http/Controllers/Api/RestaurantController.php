@@ -23,7 +23,11 @@ class RestaurantController extends Controller
 
         $restaurants = Restaurant::whereHas('types', function ($query) use ($typeIds) {
             $query->whereIn('type_id', $typeIds);
-        })->paginate(6);
+        })
+            ->whereDoesntHave('types', function ($query) use ($typeIds) {
+                $query->whereNotIn('type_id', $typeIds);
+            })
+            ->paginate(6);
 
         return response()->json([
             'success' => true,
