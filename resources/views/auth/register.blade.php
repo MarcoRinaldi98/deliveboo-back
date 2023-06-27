@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Registrati - i campi con (*) sono obbligatori') }}</div>
+                    <div class="card-header fs-2">{{ __('Registrati - i campi con (*) sono obbligatori') }}</div>
 
                     <div class="card-body">
                         <form id="register" method="POST" action="{{ route('register') }}" enctype="multipart/form-data"
