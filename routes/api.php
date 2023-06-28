@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\DishController;
 use App\Http\Controllers\Api\TypeController;
+use App\Http\Controllers\Api\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,5 @@ Route::get('/dishes', [DishController::class, 'ApiDish']);
 Route::get('/types', [TypeController::class, 'ApiType']);
 
 Route::get('/menu/{id}', [DishController::class, 'DishShow']);
+
+Route::post('/order-sent', [OrderController::class, 'sentOrder']);
