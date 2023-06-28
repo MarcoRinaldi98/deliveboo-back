@@ -22,8 +22,10 @@ class RestaurantController extends Controller
         $typeIds = $request->input('typeIds', []);
 
         $restaurants = Restaurant::whereHas('types', function ($query) use ($typeIds) {
-            $query->whereIn('type_id', $typeIds);
-        })->paginate(6);
+            foreach ($typeIds as $typeId) {
+                $query->where('type_id', $typeId);
+            }
+        }, '=', count($typeIds))->paginate(6);
 
         return response()->json([
             'success' => true,
