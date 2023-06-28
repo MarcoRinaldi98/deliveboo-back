@@ -75,8 +75,8 @@ function validateForm(form) {
 
     
     // Validazione: testo
-    if (!/^[a-zA-Z]+$/.test(name) || !/^[a-zA-Z]+$/.test(surname)) {
-        let errorMessages = document.querySelectorAll('.error-name');
+    if (!/^[a-zA-Z]+$/i.test(name) || !/^[a-zA-Z]+$/i.test(surname)) {
+            let errorMessages = document.querySelectorAll('.error-name');
             errorMessages.forEach(function(element) {
             element.textContent = "Il campo nome e cognome devono contenere solo caratteri alfabetici.";
         });
