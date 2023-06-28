@@ -36,9 +36,30 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request){
     {
-        //
+        $validatedData = $request->validate([
+            'guest_name' => 'required',
+            'guest_surname' => 'required',
+            'guest_address' => 'required',
+            'guest_email' => 'required|email',
+            'guest_phone' => 'required',
+            'nonce' => 'required',
+        ]);
+
+        $order = new Order();
+
+            $order->guest_name = $request->input('guest_name');
+            $order->guest_surname = $request->input('guest_surname');
+            $order->guest_address = $request->input('guest_address');
+            $order->guest_email = $request->input('guest_email');
+            $order->guest_phone = $request->input('guest_phone');
+            $order->nonce = $request->input('nonce');
+
+        $order->save();
+
+        return response()->json(['success' => true, 'message' => 'Ordine creato con successo']);
+    }
     }
 
     /**
