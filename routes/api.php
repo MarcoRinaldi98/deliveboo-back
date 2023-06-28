@@ -24,10 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/restaurantsTypes', [RestaurantController::class, 'getRestaurantsByMultipleTypes']);
 
-Route::get('/restaurants', [RestaurantController::class, 'ApiRestaurant']); 
+Route::get('/restaurants', [RestaurantController::class, 'ApiRestaurant']);
 
 Route::get('/dishes', [DishController::class, 'ApiDish']);
 
 Route::get('/types', [TypeController::class, 'ApiType']);
 
-Route::get('/dish/{id}', [DishController::class, 'DishShow']);
+Route::get('/menú/{id}', [DishController::class, 'DishShow']);
