@@ -5,6 +5,10 @@ import.meta.glob([
     '../img/**'
 ])
 
+
+
+
+
 const deleteButtons = document.querySelectorAll('.form_delete_post button[type="submit"]');
 
 
