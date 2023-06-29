@@ -1,38 +1,55 @@
 @extends('layouts.admin')
 
-@section('content')
+@section('page-title', 'Dettaglio Ristorante')
 
-@foreach ($restaurants as $restaurant)
-    @auth
-        @if ($restaurant->user_id == auth()->user()->id)
-            
-            <div class="card mb-3">
-                <div class="text-center fs-2 infoshow">INFO RISTORANTE</div>
-                <div class="row g-0">
-                    @if ($restaurant->image && file_exists(public_path('storage/' . $restaurant->image)))
-                        <div class="col-md-4 p-3">
-                            <img src="{{ asset('storage/'. $restaurant->image) }}" class="img-fluid rounded-start h-100" alt="{{ $restaurant->name }}">
-                        </div>
-                    @else
-                        <div class="col-md-4 py-3 pe-2">
-                            <img src="https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png" class="img-fluid rounded-start h-100" alt="{{ $restaurant->name }}">
-                        </div>
-                    @endif
-                    
-                    <div class="col-md-8 py-3">
-                        <h5 class="card-title">{{ $restaurant->name }}</h5>
-                        <p class="card-text">{{ $restaurant->address }}</p>
-                        <p class="card-text">{{ $restaurant->vat }}</p>
-                        <p class="card-text">{{ $restaurant->phone }}</p>
-                        <p class="card-text">{{ $restaurant->description }}</p>
+@section('content')
+    @foreach ($restaurants as $restaurant)
+        @auth
+            @if ($restaurant->user_id == auth()->user()->id)
+                <section id="my-restaurant" class="py-5">
+                    <div class="d-flex justify-content-around align-items-center pb-5">
+                        <i class="fa-solid fa-utensils fs-1"></i>
+                        <h2 class="text-center fs-3 fs-md-1 infoshow">INFO RISTORANTE</h2>
                         <div class="px-2">
-                            <a href="{{route('admin.admin.restaurants.edit', ['restaurant' => $restaurant->id])}}" class="btn btn-info text-white">Modifica</a>
+                            <a href="{{ route('admin.admin.restaurants.edit', ['restaurant' => $restaurant->id]) }}"
+                                class="btn ms_btn">Modifica Informazioni</a>
                         </div>
                     </div>
-                </div>
-            </div>
-        @endif
-    @endauth
-@endforeach
+                    <h1 class="fs-1">{{ $restaurant->name }}</h1>
+                    <div class="row g-0">
+                        @if ($restaurant->image && file_exists(public_path('storage/' . $restaurant->image)))
+                            <div class="col-12 col-xl-6 p-xl-5">
+                                <img src="{{ asset('storage/' . $restaurant->image) }}" class="img-fluid rounded"
+                                    alt="{{ $restaurant->name }}">
+                            </div>
+                        @else
+                            <div class="col-12 col-xl-6 p-xl-5">
+                                <img src="https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png"
+                                    class="img-fluid rounded" alt="{{ $restaurant->name }}">
+                            </div>
+                        @endif
 
+                        <div class="col-12 col-xl-6">
+                            <p class="p-xl-5 pt-3">{{ $restaurant->description }}</p>
+                        </div>
+
+                        <div class="d-flex text-start justify-content-around align-items-center">
+                            <div>
+                                <div>Indirizzo:</div>
+                                <small class="card-text">{{ $restaurant->address }}</small>
+                            </div>
+                            <div>
+                                <div>Numero di telefono:</div>
+                                <small class="card-text">{{ $restaurant->phone }}</small>
+                            </div>
+                            <div>
+                                <div>Partita IVA:</div>
+                                <small class="card-text">{{ $restaurant->vat }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            @endif
+        @endauth
+    @endforeach
 @endsection

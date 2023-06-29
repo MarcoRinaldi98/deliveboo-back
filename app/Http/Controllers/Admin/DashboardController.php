@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $user = User::all();
         $restaurants = Restaurant::all();
-        return view('admin.restaurants.show', compact('restaurants','user'));
+        return view('admin.restaurants.show', compact('restaurants', 'user'));
     }
-
 }

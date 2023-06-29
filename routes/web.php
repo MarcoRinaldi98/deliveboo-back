@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\DishController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Restaurants;
 use App\Models\Type;
@@ -23,7 +24,7 @@ use App\Models\Type;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::middleware(['auth', 'verified'])
@@ -31,13 +32,13 @@ Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->group(function () {
 
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); 
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:id']);
         Route::resource('types', TypeController::class)->parameters(['types' => 'type:id']);
         Route::resource('dishes', DishController::class)->parameters(['dishes' => 'dish:id']);
-        Route::get('restaurants/{restaurant}/dishes/create','RestaurantController@show', [DishController::class, 'create'])->name('admin.dishes.create')->middleware('check.restaurant.ownership');
-        Route::post('restaurants/{restaurant}/dishes', 'RestaurantController@edit',[DishController::class ,'store'])->name('admin.dishes.store')->middleware('check.restaurant.ownership');
-        Route::get('/dishes/{dish}/edit/{restaurant}','DishController@edit', [DishController::class, 'edit'])->name('admin.dishes.edit')->middleware('check.dish.ownership');
+        Route::get('restaurants/{restaurant}/dishes/create', 'RestaurantController@show', [DishController::class, 'create'])->name('admin.dishes.create')->middleware('check.restaurant.ownership');
+        Route::post('restaurants/{restaurant}/dishes', 'RestaurantController@edit', [DishController::class, 'store'])->name('admin.dishes.store')->middleware('check.restaurant.ownership');
+        Route::get('/dishes/{dish}/edit/{restaurant}', 'DishController@edit', [DishController::class, 'edit'])->name('admin.dishes.edit')->middleware('check.dish.ownership');
         Route::put('/dishes/{dish}/{restaurant}', 'DishController@show', [DishController::class, 'update'])->name('admin.dishes.update')->middleware('check.dish.ownership');
         Route::delete('posts/{id}/deleteImage', [DishController::class, 'deleteImage'])->name('dishes.deleteImage');
         Route::delete('restaurants/{id}/deleteImage', [RestaurantController::class, 'deleteImage'])->name('restaurants.deleteImage');
@@ -45,8 +46,7 @@ Route::middleware(['auth', 'verified'])
         Route::put('restaurants/{restaurant}', [RestaurantController::class, 'update'])->name('admin.restaurants.update');
         Route::get('restaurants/{restaurant}/edit', [RestaurantController::class, 'edit'])->name('admin.restaurants.edit');
         Route::resource('orders', OrderController::class)->parameters(['orders' => 'order:id']);
-
-});
+    });
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -59,4 +59,4 @@ Route::fallback(function () {
     abort(404, 'Page not found');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
