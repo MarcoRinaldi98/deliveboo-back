@@ -1,5 +1,4 @@
 @extends('layouts.guest')
 @section('content')
-    <div></div>
-
+    <div>PORCO DIO</div>
 @endsection
