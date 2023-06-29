@@ -33,4 +33,4 @@ Route::get('/types', [TypeController::class, 'ApiType']);
 
 Route::get('/menu/{id}', [DishController::class, 'DishShow']);
 
-Route::post('/order', [OrderController::class, 'createOrder']);
+Route::post('/order', [OrderController::class, 'store']);
