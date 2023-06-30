@@ -22,6 +22,7 @@ class Order extends Model
         'amount',
         'status',
         'date',
-        'restaurant_id'
+        'restaurant_id',
+        'nonce',
     ];
 }

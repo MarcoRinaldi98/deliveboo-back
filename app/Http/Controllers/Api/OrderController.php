@@ -20,7 +20,8 @@ class OrderController extends Controller
             'amount'=>'required',
             'status'=>'required',
             'date'=>'required',
-            'restaurant_id'=>'required'
+            'restaurant_id'=>'required',
+            'nonce'=>'nullable'
         ]);
 
         // Creazione dell'ordine nel database
@@ -34,6 +35,7 @@ class OrderController extends Controller
             'status' => $validatedData['status'],
             'date' => $validatedData['date'],
             'restaurant_id' => $validatedData['restaurant_id'],
+            'nonce' => $validatedData['nonce'],
         ]);
 
         // Puoi eseguire altre operazioni qui, come inviare notifiche o aggiornare altre tabelle nel database
