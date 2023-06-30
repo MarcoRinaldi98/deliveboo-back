@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\DishController;
 use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\OrderController;
+use Braintree\Gateway;
+use App\Http\Controllers\Api\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,7 @@ use App\Http\Controllers\Api\OrderController;
 |
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| is assigned the "api" middleware group. Enjoy building your API!https://desktop.postman.com/?desktopVersion=10.15.0&userId=26542330&teamId=0
 |
 */
 
@@ -34,3 +36,7 @@ Route::get('/types', [TypeController::class, 'ApiType']);
 Route::get('/menu/{id}', [DishController::class, 'DishShow']);
 
 Route::post('/order-sent', [OrderController::class, 'sentOrder']);
+
+Route::get('/generate-client-token',[PaymentController::class, 'getToken']);
+// *** PAYMENT ***
+Route::post('/process-payment',[PaymentController::class, 'processPayment']);
