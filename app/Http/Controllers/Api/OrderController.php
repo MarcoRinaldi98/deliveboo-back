@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function store(Request $request)
     {
-        // Validazione dei dati del form (opzionale)
+    
         $validatedData = $request->validate([
             'guest_name' => 'required',
             'guest_surname' => 'required',
@@ -21,10 +21,9 @@ class OrderController extends Controller
             'status'=>'required',
             'date'=>'required',
             'restaurant_id'=>'required',
-            'nonce'=>'nullable'
+            'nonce'=>'nullable',
         ]);
 
-        // Creazione dell'ordine nel database
         $order = Order::create([
             'guest_name' => $validatedData['guest_name'],
             'guest_surname' => $validatedData['guest_surname'],

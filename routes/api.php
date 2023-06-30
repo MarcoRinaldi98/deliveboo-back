@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\DishController;
 use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\DishOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,5 @@ Route::get('/types', [TypeController::class, 'ApiType']);
 Route::get('/menu/{id}', [DishController::class, 'DishShow']);
 
 Route::post('/order', [OrderController::class, 'store']);
+
+Route::post('/dishOrder', [DishOrderController::class, 'store']);
