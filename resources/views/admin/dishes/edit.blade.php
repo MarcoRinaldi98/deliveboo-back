@@ -100,5 +100,12 @@
 
             <button type="submit" class="btn ms_btn">Aggiorna Piatto</button>
         </form>
+
+        <form id="form-delete" action="{{ route('admin.dishes.deleteImage', ['id' => $dish->id]) }}"
+            method="POST">
+            @csrf
+            @method('DELETE')
+        </form>
+
     @endsection
 </section>
