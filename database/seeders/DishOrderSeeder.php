@@ -24,7 +24,10 @@ class DishOrderSeeder extends Seeder
                 DB::table('dish_order')->insert([
                     'order_id' => $orderId,
                     'dish_id' => $dishId,
+                    'quantity' => 1,
                 ]);
-            }}
+            }
+        }
+
     }
 }
