@@ -7,23 +7,27 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use Braintree\Transaction;
 use Braintree\Configuration;
+use Illuminate\Validation\ValidationException;
  
 class OrderController extends Controller
 {
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'guest_name' => 'required',
-            'guest_surname' => 'required',
-            'guest_address' => 'required',
-            'guest_email' => 'required|email',
-            'guest_phone' => 'required',
-            'amount' => 'required',
-            'status' => 'required',
-            'date' => 'required',
-            'restaurant_id' => 'required',
-            'nonce' => 'nullable',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'guest_name' => 'required',
+                'guest_surname' => 'required',
+                'guest_address' => 'required',
+                'guest_email' => 'required|email',
+                'guest_phone' => 'required',
+                'amount' => 'required',
+                'date' => 'required',
+                'restaurant_id' => 'required',
+                'nonce' => 'nullable',
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json(['message' => $e->getMessage(), 'order' => false], 400);
+        }
 
         Configuration::environment('sandbox'); 
         Configuration::merchantId('c3ksmy3jwrcb35jv'); 
@@ -48,10 +52,10 @@ class OrderController extends Controller
                 'guest_email' => $validatedData['guest_email'],
                 'guest_phone' => $validatedData['guest_phone'],
                 'amount' => $validatedData['amount'],
-                'status' => $validatedData['status'],
                 'date' => $validatedData['date'],
                 'restaurant_id' => $validatedData['restaurant_id'],
                 'nonce' => $validatedData['nonce'],
+                'status' => 1, 
             ]);
 
             return response()->json([
@@ -60,7 +64,7 @@ class OrderController extends Controller
             ], 201);
         } else {
             $error = $result->message;
-            return response()->json(['message' => $error, 'order' => false]);
+            return response()->json(['message' => $error, 'order' => false], 400);
         }
     }
 }

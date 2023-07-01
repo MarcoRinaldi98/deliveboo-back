@@ -10,19 +10,20 @@ class DishOrderController extends Controller
 {
     public function store(Request $request)
     {
-        
-        $dishOrder = DishOrder::create([
-            'order_id'=>3,
-            'dish_id'=>3,
-            'quantity'=>'2'
+        $validatedData = $request->validate([
+            'order_id' => 'required',
+            'dish_id' => 'required', 
+            'quantity' => 'required', 
         ]);
 
-        $dishOrder->timestamps = false; 
-
-        $dishOrder->save();
+        $dishOrder = DishOrder::create([
+            'order_id' => 7,
+            'dish_id' => $validatedData['dish_id'],
+            'quantity' => $validatedData['quantity'],
+        ]);
 
         return response()->json([
-            'message' => 'Pivot fatta',
+            'message' => 'Pivot creata con successo',
             'dishOrder' => $dishOrder,
         ], 201);
     }

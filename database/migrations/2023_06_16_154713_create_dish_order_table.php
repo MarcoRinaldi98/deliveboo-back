@@ -19,6 +19,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('CASCADE');
+
+            $table->integer('quantity')->default(1);
         });
     }
 
@@ -29,6 +31,12 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dish_order');
+        Schema::table('dish_order', function (Blueprint $table) {
+            $table->dropForeign(['dish_id']);
+            $table->dropForeign(['order_id']);
+            $table->dropColumn('dish_id');
+            $table->dropColumn('order_id');
+            $table->dropColumn('quantity');
+        });
     }
 };
