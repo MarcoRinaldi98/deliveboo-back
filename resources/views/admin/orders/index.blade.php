@@ -44,5 +44,6 @@
 
             </tbody>
         </table>
+
     </section>
 @endsection
