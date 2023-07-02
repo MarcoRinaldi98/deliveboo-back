@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class StatisticController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+
         $orders = Order::selectRaw('YEAR(date) as year, MONTH(date) as month, COUNT(*) as total, SUM(amount) as amount')
+            ->where('restaurant_id', $user->id)
             ->groupBy('year', 'month')
             ->orderBy('year', 'asc')
             ->orderBy('month', 'asc')
