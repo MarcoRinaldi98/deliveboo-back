@@ -80,6 +80,11 @@ function validateForm(form) {
     let image = form.image.value;
     let types = Array.from(form.querySelectorAll('input[name^="types"]:checked')).map(checkbox => checkbox.value);
 
+    let errorMessages = document.querySelectorAll('.error-message');
+        errorMessages.forEach(function (element) {
+        element.textContent = "";
+        });
+
     if (name.trim() === '' || surname.trim() === '' || email.trim() === '' || password.trim() === '' ||
         restaurant_name.trim() === '' || address.trim() === '' || vat.trim() === '' || phone.trim() === '') {
         let errorMessages = document.querySelectorAll('.error-message');
