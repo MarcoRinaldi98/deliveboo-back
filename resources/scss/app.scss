@@ -25,6 +25,13 @@ body {
     padding-top: 2px;
 }
 
+input[type=file]::file-selector-button {
+    background-color: #f3a446;
+    color: #1d1d1d;
+    font-weight: bold;
+    border-color: #1d1d1d;
+}
+
 // AUTH
 // Login
 #my-login {
@@ -201,6 +208,17 @@ body {
         border-bottom-right-radius: 30%;
         border-bottom-left-radius: 30%;
 
+        & .ms_back-btn {
+            border: 2px solid #1d1d1d;
+            background-color: #f3a446;
+            color: #1d1d1d;
+
+            &:hover {
+                background-color: #a06235;
+                color: white;
+            }
+        }
+
         & .logo {
             font-size: 44px;
             color: #f3a446;
@@ -282,6 +300,7 @@ body {
     & .my-img-wrapper {
         position: relative;
         width: 200px;
+        min-height: 50px;
         margin-bottom: 0.5rem;
 
         & #btn-delete {
@@ -387,6 +406,7 @@ body {
     & .my-img-wrapper {
         position: relative;
         width: 200px;
+        min-height: 50px;
         margin-bottom: 0.5rem;
 
         & #btn-delete {
@@ -472,4 +492,8 @@ body {
             }
         }
     }
+}
+
+.content-container {
+    background-color: white;
 }

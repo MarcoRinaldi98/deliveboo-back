@@ -1,6 +1,10 @@
 <header id="my-header">
     <nav class="navbar navbar-expand-md bg-black navbar-light shadow-sm">
         <div class="container">
+            <a class="btn fw-semibold rounded-5 ms_back-btn" href="http://localhost:5174/">
+                Vai al Sito
+            </a>
+
             <a class="navbar-brand d-flex align-items-center" href="{{ route('admin.dashboard') }}">
                 <h1 class="logo">DeliveBoo</h1>
             </a>

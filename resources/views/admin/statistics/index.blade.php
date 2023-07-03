@@ -3,7 +3,7 @@
 @section('page-title', 'Statistiche Ordini')
 
 @section('content')
-    <div class="container pt-5">
+    <div class="container pt-5 content-container mt-5">
         <canvas id="orderChart"></canvas>
     </div>
 
@@ -20,32 +20,42 @@
             return value.amount;
         });
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
+        var config = {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
                     label: 'Ordini',
                     data: data,
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    borderColor: 'rgba(255, 255, 255, 1)',
-                    borderWidth: 1
-                }, {
+                    borderColor: 'rgba(255, 0, 0, 1)',
+                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                    borderWidth: 2,
+                    borderRadius: Number.MAX_VALUE,
+                    borderSkipped: false,
+                },
+                {
                     label: 'Totale',
                     data: amountData,
-                    backgroundColor: 'rgba(255, 255, 0, 0.2)',
-                    borderColor: 'rgba(255, 255, 0, 1)',
-                    borderWidth: 1
-                }]
+                    borderColor: 'rgba(0, 0, 255, 1)',
+                    backgroundColor: 'rgba(0, 0, 255, 0.5)',
+                    borderWidth: 2,
+                    borderRadius: 5,
+                    borderSkipped: false,
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0,
+                    suggestedMax: Math.max(Math.max(...data), Math.max(...amountData)) * 1.1,
+                },
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        precision: 0
-                    }
-                }
-            }
-        });
+        },
+    };
+
+        new Chart(ctx, config);
     </script>
 @endsection
