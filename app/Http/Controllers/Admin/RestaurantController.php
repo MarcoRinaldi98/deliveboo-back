@@ -66,7 +66,7 @@ class RestaurantController extends Controller
         }
 
 
-        return redirect()->route('admin.restaurants.show', ['restaurant' => $newRestaurant->id])->with('status', 'Restaurant aggiunto con successo');
+        return redirect()->route('admin.restaurants.show', ['restaurant' => $newRestaurant->id])->with('status', 'Ristorante aggiunto con successo');
     }
 
     /**
@@ -145,7 +145,7 @@ class RestaurantController extends Controller
 
         $restaurant->update($validatedData);
 
-        return redirect()->route('admin.restaurants.show', ['restaurant' => $restaurant->id])->with('status', 'Restaurant aggiornato con successo');
+        return redirect()->route('admin.restaurants.show', ['restaurant' => $restaurant->id])->with('status', 'Ristorante aggiornato con successo');
     }
 
     /**

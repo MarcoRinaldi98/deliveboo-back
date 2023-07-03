@@ -15,19 +15,6 @@
                 Torna al dettaglio ristorante
             </a>
 
-            <div class="mb-3">
-                <label for="available" class="form-label">Disponibile</label>
-                <select class="inputColor form-select @error('available') is-invalid @enderror" name="available"
-                    id="available">
-                    <option @selected(old('available') == 0) value="0">No</option>
-                    <option @selected(old('available') == 1) selected value="1">Si</option>
-                </select>
-                @error('available')
-                    <div class="invalid-feedback">
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    </div>
-                @enderror
-            </div>
 
             <div class="my-3">
                 <label for="name" class="form-label">Titolo</label>
@@ -66,13 +53,13 @@
                 <label for="available" class="form-label">Disponibile</label>
                 <select class="inputColor form-select @error('available') is-invalid @enderror" name="available"
                     id="available">
-                    <option @selected(old('available') == 1) value="1">Si</option>
                     <option @selected(old('available') == 0) value="0">No</option>
+                    <option @selected(old('available') == 1) selected value="1">Si</option>
                 </select>
                 @error('available')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    <div class="invalid-feedback">
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    </div>
                 @enderror
             </div>
 

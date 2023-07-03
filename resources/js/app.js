@@ -109,10 +109,8 @@ function validateForm(form) {
     }
 
     if (vat.length < 11 || vat.length > 11) {
-        errorMessages.forEach(function (element) {
-            element.textContent = "Deve avere almeno 11 caratteri.";
+        document.getElementById('error-vat').textContent = "Deve avere almeno 11 caratteri.";
         return false;
-        });
     }
 
     if (phone.length < 10) {
@@ -152,38 +150,30 @@ function validateForm(form) {
     // Verifica il formato dell'email utilizzando una regular expression
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        errorMessages.forEach(function (element) {
-            element.textContent = "Inserisci un email valida con la @ (ex.test@test.it).";
-        return false;
-        });
+        document.getElementById('error-email').textContent = "Inserisci un email valida con la @ (ex.test@test.it).";
+        return false
     }
 
 
 
     if (types.length == 0) {
-        errorMessages.forEach(function (element) {
-            element.textContent = "Inserire almeno un tipo.";
+        document.getElementById('error-type').textContent = "Inserire almeno un tipo.";
         return false;
-        });
     }
 
     let validTypes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
     for (let i = 0; i < types.length; i++) {
         if (!validTypes.includes(parseInt(types[i]))) {
-            errorMessages.forEach(function (element) {
-                element.textContent = "Uno o più tipi selezionati non sono validi.";
+            document.querySelector('.error-types').textContent = "Uno o più tipi selezionati non sono validi.";
             return false;
-            });
         }
     }
 
     // Verifica se il campo "confirmPassword" è obbligatorio
     if (!confirmPassword) {
-        errorMessages.forEach(function (element) {
-            element.textContent= "Uno o più tipi selezionati non sono validi.";
+        document.getElementById('error-verify').textContent = "Uno o più tipi selezionati non sono validi.";
         return false;
-        });
     }
 
     // Verifica se la password coincide con la conferma della password
