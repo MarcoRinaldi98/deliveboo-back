@@ -47,12 +47,12 @@ class DishController extends Controller
      */
     public function store(Request $request, Restaurant $restaurant)
     {
-       
+
         $data = $request->validate([
             'name' => 'required|string|max:150',
-            'description'=>'nullable|max:1000',
+            'description' => 'nullable|max:1000',
             'price' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
-            'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif,svg,webp'], 
+            'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif,svg,webp'],
             'available' => 'required',
             'restaurant_id' => 'exists:restaurants,id',
         ]);
@@ -61,9 +61,9 @@ class DishController extends Controller
             $path = Storage::put('cover', $request->image);
             $data['image'] = $path;
         }
-    
+
         $dish = Dish::create($data);
-    
+
         return redirect()->route('admin.dishes.index', compact('restaurant'))->with('status', 'Piatto aggiunto correttamente.');
     }
 
@@ -75,7 +75,7 @@ class DishController extends Controller
      */
     public function show(Dish $dish, Restaurant $restaurant)
     {
-        if($dish->restaurant_id !== auth()->user()->id){
+        if ($dish->restaurant_id !== auth()->user()->id) {
             abort(403, 'Accesso non autorizzato');
         }
 
@@ -92,10 +92,10 @@ class DishController extends Controller
     {
         $restaurants = Restaurant::all();
 
-        if($dish->restaurant_id !== auth()->user()->id){
+        if ($dish->restaurant_id !== auth()->user()->id) {
             abort(403, 'Accesso non autorizzato');
         }
-        
+
         return view('admin.dishes.edit', compact('dish', 'restaurants'));
     }
 
@@ -110,11 +110,11 @@ class DishController extends Controller
     public function update(Request $request, Dish $dish, Restaurant $restaurant)
     {
         $data = $request->validate([
-            'name'=>'required|string|max:150',
-            'description'=>'nullable|max:1000',
+            'name' => 'required|string|max:150',
+            'description' => 'nullable|max:1000',
             'price' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
             'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif,svg,webp'],
-            'available'=>'required',
+            'available' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
@@ -125,12 +125,11 @@ class DishController extends Controller
 
             $path = Storage::put('cover', $request->image);
             $data['image'] = $path;
-
         }
 
         $dish->update($data);
 
-        return redirect()->route('admin.dishes.index', compact('restaurant', 'dish'))->with('status', 'Piatto Aggiornato correttamente.');
+        return redirect()->route('admin.dishes.index', compact('restaurant', 'dish'))->with('status', 'Piatto aggiornato correttamente.');
     }
 
     /**
@@ -149,7 +148,8 @@ class DishController extends Controller
         return redirect()->route('admin.dishes.index');
     }
 
-    public function deleteImage($id) {
+    public function deleteImage($id)
+    {
 
         $dish = Dish::where('id', $id)->firstOrFail();
 
@@ -160,6 +160,5 @@ class DishController extends Controller
         }
 
         return redirect()->route('admin.dishes.edit', $dish->id);
-
     }
 }

@@ -481,11 +481,6 @@ input[type=file]::file-selector-button {
                 color: #f3a446;
                 border: none;
 
-                &:first-child {
-                    color: #a06235;
-                    font-weight: bold;
-                }
-
                 & i {
                     text-shadow: 1px 1px 2px #000;
                 }

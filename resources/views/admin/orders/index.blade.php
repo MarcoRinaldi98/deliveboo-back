@@ -9,7 +9,6 @@
         <table class="table table-dark mt-4">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Cognome</th>
                     <th scope="col">Email</th>
@@ -25,7 +24,6 @@
                 @foreach ($orders as $order)
                     @if ($order->restaurant_id == auth()->user()->id)
                         <tr>
-                            <td>{{ $order->id }}</td>
                             <td>{{ $order->guest_name }}</td>
                             <td>{{ $order->guest_surname }}</td>
                             <td>{{ $order->guest_email }}</td>
@@ -37,7 +35,7 @@
                             @else
                                 <td>In lavorazione</td>
                             @endif
-                            <td>{{ $order->created_at }}</td>
+                            <td>{{ $order->date }}</td>
                         </tr>
                     @endif
                 @endforeach
