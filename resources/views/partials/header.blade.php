@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md bg-black navbar-light shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('admin.dashboard') }}">
-                <img src="logo.gif" alt="logo" class="logo">
+                <h1 class="logo">DeliveBoo</h1>
             </a>
 
             <div class="" id="navbarSupportedContent">
