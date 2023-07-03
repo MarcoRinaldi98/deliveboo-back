@@ -24,5 +24,11 @@
                 Lista Ordini
             </a>
         </li>
+        <li class="nav-item">
+            <a href="http://127.0.0.1:8000/admin/statistics"
+                class="nav-link @if (Route::currentRouteName() == 'admin.statistics.index') active @endif">
+                Statistiche
+            </a>
+        </li>
     </ul>
 </section>

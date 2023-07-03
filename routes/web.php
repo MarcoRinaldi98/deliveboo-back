@@ -47,7 +47,7 @@ Route::middleware(['auth', 'verified'])
         Route::put('restaurants/{restaurant}', [RestaurantController::class, 'update'])->name('admin.restaurants.update');
         Route::get('restaurants/{restaurant}/edit', [RestaurantController::class, 'edit'])->name('admin.restaurants.edit');
         Route::resource('orders', OrderController::class)->parameters(['orders' => 'order:id']);
-        Route::get('/admin/statistics', [StatisticController::class, 'index'])->name('admin.statistics.index');
+        Route::get('/statistics', [StatisticController::class, 'index'])->name('admin.statistics.index');
     });
 
 // Route::middleware('auth')->group(function () {

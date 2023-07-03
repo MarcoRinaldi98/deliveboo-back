@@ -36,14 +36,15 @@
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
                                 </div>
-                                <form action="{{ route('admin.dishes.destroy', ['dish' => $dish->id]) }}" method="POST"
-                                    onsubmit="return confirm('Vuoi Eliminare?');">
+                                <form action="{{ route('admin.dishes.destroy', ['dish' => $dish->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="submit" class="btn btn-danger">
+                                    <button id="delete-btn" type="submit" class="btn btn-danger">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </button>
+
+                                    @include('partials.delete-modal')
                                 </form>
                             </td>
                         </tr>

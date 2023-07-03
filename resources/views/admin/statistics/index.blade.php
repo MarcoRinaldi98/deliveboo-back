@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 
+@section('page-title', 'Statistiche Ordini')
+
 @section('content')
-    <div class="container">
+    <div class="container pt-5">
         <canvas id="orderChart"></canvas>
     </div>
 
@@ -11,10 +13,10 @@
         var chartData = {!! json_encode($chartData) !!};
 
         var labels = Object.keys(chartData);
-        var data = Object.values(chartData).map(function (value) {
+        var data = Object.values(chartData).map(function(value) {
             return value.total;
         });
-        var amountData = Object.values(chartData).map(function (value) {
+        var amountData = Object.values(chartData).map(function(value) {
             return value.amount;
         });
 

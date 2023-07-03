@@ -42,14 +42,15 @@
                                         Modifica
                                     </a>
                                 </div>
-                                <form action="{{ route('admin.dishes.destroy', ['dish' => $dish->id]) }}" method="POST"
-                                    onsubmit="return confirm('Vuoi Eliminare?');">
+                                <form action="{{ route('admin.dishes.destroy', ['dish' => $dish->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
 
                                     <button type="submit" class="btn btn-danger">
                                         Elimina
                                     </button>
+
+                                    @include('partials.delete-modal')
                                 </form>
                             </div>
                         </div>
